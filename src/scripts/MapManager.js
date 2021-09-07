@@ -1,24 +1,37 @@
 class MapManagement {
+  #currentState;
   constructor() {
     this.STATES = {
       NONE: 0,
-      SELECTING: 1,
+      ADD_MARKER: 1,
     };
-    this.currentState = this.STATES.NONE;
+    this.ICON_TYPES = new Map();
+    this.#currentState = this.STATES.NONE;
     if (this.instance === null) {
       MapManagement.instance = this;
     }
     return MapManagement.instance;
   }
 
+  initialize() {
+    this.ICON_TYPES.set("SHOP", { type: 0, name: "shop" });
+    this.ICON_TYPES.set("MARKER", { type: 1, name: "geo-alt-fill" });
+  }
+
+  getCurrentState() {
+    return this.#currentState;
+  }
+
+  setCurrentState(state) {
+    this.#currentState = state;
+  }
+
   createMarker() {
     let me = this === undefined ? MapManager : this;
-    console.log(me);
-    if (me.currentState === me.STATES.NONE) {
-      me.currentState = me.STATES.SELECTING;
-    }
+    me.#currentState = me.STATES.ADD_MARKER;
   }
 }
 
 const MapManager = new MapManagement();
+MapManager.initialize();
 export default MapManager;
