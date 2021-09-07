@@ -6,10 +6,15 @@ import {
   ZoomControl,
 } from "react-leaflet";
 import NavBar from "./components/NavBar";
+import MapClickHandler from "./components/MapClickHandler";
 
 function App() {
   const defaultCenter = [38.9072, -77.0369];
   const defaultZoom = 8;
+
+  const mapWasClicked = (...settings) => {
+    console.log(settings);
+  };
 
   return (
     <div className="App">
@@ -39,6 +44,7 @@ function App() {
             return null;
           }}
         </MapConsumer>
+        <MapClickHandler onMapClicked={mapWasClicked}></MapClickHandler>
       </MapContainer>
     </div>
   );
