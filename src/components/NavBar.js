@@ -45,11 +45,11 @@ function NavBar() {
               </ul>
             </li>
             <NavbarButton
-              icon="shop"
+              icon={MapManager.ICON_TYPES.get("SHOP").name}
               action={MapManager.createMarker}
             ></NavbarButton>
             <NavbarButton
-              icon="geo-alt-fill"
+              icon={MapManager.ICON_TYPES.get("MARKER").name}
               action={MapManager.createMarker}
             ></NavbarButton>
           </ul>
