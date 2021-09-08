@@ -1,8 +1,12 @@
 import "./../css/markerInfoModal.css";
 
 function MarkerInfoModal(props) {
-  const handleClose = () => {
-    props?.onCloseModal();
+  const handleClose = (e) => {
+    let saveData = false;
+    if (e.target.id === "save") {
+      saveData = true;
+    }
+    props?.onCloseModal(saveData);
   };
 
   return (
@@ -15,6 +19,7 @@ function MarkerInfoModal(props) {
         <div className="modal-header">
           <h5 className="modal-title">New marker</h5>
           <button
+            id="xclose"
             type="button"
             className="btn-close"
             aria-label="Close"
@@ -42,12 +47,18 @@ function MarkerInfoModal(props) {
         <div className="modal-footer">
           <button
             type="button"
+            id="close"
             className="btn btn-secondary"
             onClick={handleClose}
           >
             Close
           </button>
-          <button type="button" className="btn btn-primary">
+          <button
+            type="button"
+            id="save"
+            className="btn btn-primary"
+            onClick={handleClose}
+          >
             Save changes
           </button>
         </div>

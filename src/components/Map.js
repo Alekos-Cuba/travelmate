@@ -27,7 +27,12 @@ function Map() {
     setShowInfoModal(true);
   };
 
-  const handleModalClose = () => {
+  const handleModalClose = (doSave) => {
+    if (doSave) {
+    } else {
+      markers.pop();
+      setMarkers(markers);
+    }
     MapManager.enableMapControls(map);
     setShowInfoModal(false);
   };
