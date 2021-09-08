@@ -1,6 +1,5 @@
 import { useMapEvent } from "react-leaflet";
 import MapManager from "../scripts/MapManager";
-import L from "leaflet";
 
 function MapClickHandler(props) {
   const map = useMapEvent("click", (e) => {
@@ -10,7 +9,7 @@ function MapClickHandler(props) {
       case MapManager.STATES.ADD_MARKER: {
         icon = MapManager.ICON_TYPES.get("MARKER");
         MapManager.setCurrentState(MapManager.STATES.NONE);
-        props?.onMapClicked(icon, lat, lng);
+        props?.onMapClicked(icon, lat, lng, map);
         break;
       }
       default: {
