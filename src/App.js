@@ -4,16 +4,22 @@ import {
   MapContainer,
   TileLayer,
   ZoomControl,
+  Marker,
+  Popup,
 } from "react-leaflet";
 import NavBar from "./components/NavBar";
 import MapClickHandler from "./components/MapClickHandler";
+import { useState } from "react";
 
 function App() {
+  const [markers, setMarkers] = useState([]);
   const defaultCenter = [38.9072, -77.0369];
   const defaultZoom = 8;
 
   const mapWasClicked = (...settings) => {
-    console.log(settings);
+    let [icon, lat, lng] = [...settings];
+    let mapMarkers = [...markers, { icon, lat, lng }];
+    setMarkers(mapMarkers);
   };
 
   return (
@@ -45,6 +51,14 @@ function App() {
           }}
         </MapConsumer>
         <MapClickHandler onMapClicked={mapWasClicked}></MapClickHandler>
+        {markers.map((m) => {
+          return (
+            <Marker
+              key={`marker_${markers.indexOf(m)}`}
+              position={[m.lat, m.lng]}
+            ></Marker>
+          );
+        })}
       </MapContainer>
     </div>
   );
