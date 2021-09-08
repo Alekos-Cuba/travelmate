@@ -30,6 +30,30 @@ class MapManagement {
     let me = this === undefined ? MapManager : this;
     me.#currentState = me.STATES.ADD_MARKER;
   }
+
+  disableMapControls(map) {
+    map.dragging.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+    map.boxZoom.disable();
+    map.keyboard.disable();
+    if (map.tap) {
+      map.tap.disable();
+    }
+  }
+
+  enableMapControls(map) {
+    map.dragging.enable();
+    map.touchZoom.enable();
+    map.doubleClickZoom.enable();
+    map.scrollWheelZoom.enable();
+    map.boxZoom.enable();
+    map.keyboard.enable();
+    if (map.tap) {
+      map.tap.enable();
+    }
+  }
 }
 
 const MapManager = new MapManagement();
