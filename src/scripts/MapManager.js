@@ -4,6 +4,7 @@ class MapManagement {
     this.STATES = {
       NONE: 0,
       ADD_MARKER: 1,
+      SET_MARKER_INFO: 2,
     };
     this.ICON_TYPES = new Map();
     this.#currentState = this.STATES.NONE;

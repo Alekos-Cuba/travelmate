@@ -10,11 +10,7 @@ function MarkerInfoModal(props) {
   };
 
   return (
-    <div
-      className={`${
-        props.show ? "" : "infoModal-hidden"
-      } modal infoModal modal-dialog modal-dialog-centered`}
-    >
+    <div className="modal infoModal modal-dialog modal-dialog-centered">
       <div className="modal-content bg-dark">
         <div className="modal-header">
           <h5 className="modal-title">New marker</h5>

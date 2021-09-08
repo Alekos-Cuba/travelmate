@@ -7,8 +7,8 @@ function MapClickHandler(props) {
     let icon;
     switch (MapManager.getCurrentState()) {
       case MapManager.STATES.ADD_MARKER: {
+        MapManager.setCurrentState(MapManager.STATES.SET_MARKER_INFO);
         icon = MapManager.ICON_TYPES.get("MARKER");
-        MapManager.setCurrentState(MapManager.STATES.NONE);
         props?.onMapClicked(icon, lat, lng, map);
         break;
       }

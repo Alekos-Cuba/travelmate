@@ -18,16 +18,16 @@ function Map() {
   const defaultCenter = [38.9072, -77.0369];
   const defaultZoom = 8;
 
-  const mapWasClicked = (...settings) => {
+  const mapClickedCallback = (...settings) => {
     let [icon, lat, lng, map] = [...settings];
     setMap(map);
-    MapManager.disableMapControls(map);
     let mapMarkers = [...markers, { icon, lat, lng }];
     setMarkers(mapMarkers);
     setShowInfoModal(true);
+    MapManager.disableMapControls(map);
   };
 
-  const handleModalClose = (doSave) => {
+  const infoModalClosedCallback = (doSave) => {
     if (doSave) {
     } else {
       markers.pop();
@@ -35,15 +35,18 @@ function Map() {
     }
     MapManager.enableMapControls(map);
     setShowInfoModal(false);
+    MapManager.setCurrentState(MapManager.STATES.NONE);
   };
 
   return (
     <MapContainer center={defaultCenter} zoom={defaultZoom} zoomControl={false}>
-      <MarkerInfoModal
-        show={showInfoModal}
-        map={map}
-        onCloseModal={handleModalClose}
-      ></MarkerInfoModal>
+      {showInfoModal ? (
+        <MarkerInfoModal
+          show={showInfoModal}
+          map={map}
+          onCloseModal={infoModalClosedCallback}
+        ></MarkerInfoModal>
+      ) : null}
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -67,11 +70,9 @@ function Map() {
             return null;
           }}
         </MapConsumer>
-      ) : (
-        ""
-      )}
+      ) : null}
 
-      <MapClickHandler onMapClicked={mapWasClicked}></MapClickHandler>
+      <MapClickHandler onMapClicked={mapClickedCallback}></MapClickHandler>
       {markers.map((m) => {
         return (
           <Marker
