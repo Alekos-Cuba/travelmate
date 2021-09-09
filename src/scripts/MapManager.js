@@ -18,7 +18,7 @@ class MapManagement {
     this.ICON_TYPES.set("SHOP", { type: 0, name: "shop" });
     this.ICON_TYPES.set("MARKER", { type: 1, name: "geo-alt-fill" });
     this.ICON_TYPES.set("CATEGORY", { type: 2, name: "tags" });
-    this.ICON_TYPES.set("SETTINGS", { type: 4, name: "gear" });
+    this.ICON_TYPES.set("SETTINGS", { type: 3, name: "gear" });
   }
 
   getCurrentState() {

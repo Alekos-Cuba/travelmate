@@ -1,21 +1,6 @@
-import { useState } from "react";
-import MapManager from "../scripts/MapManager";
 import DropdownItem from "./DropdownItem";
 
 function DropdownMenu(props) {
-  const items = [
-    {
-      id: 0,
-      title: "Categories",
-      icon: MapManager.ICON_TYPES.get("CATEGORY").name,
-    },
-    {
-      id: 1,
-      title: "Settings",
-      icon: MapManager.ICON_TYPES.get("SETTINGS").name,
-    },
-  ];
-
   return (
     <div>
       <li className="nav-item dropdown">
@@ -33,10 +18,10 @@ function DropdownMenu(props) {
           className="dropdown-menu dropdown-menu-dark"
           aria-labelledby="navbarDarkDropdownMenuLink"
         >
-          {items.map((item) => {
+          {props.items?.map((item) => {
             return (
               <DropdownItem
-                key={item.id}
+                key={item._id}
                 title={item.title}
                 icon={item.icon}
               ></DropdownItem>
