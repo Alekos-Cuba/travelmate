@@ -1,8 +1,20 @@
 import MapManager from "../scripts/MapManager";
 import "./../css/navbar.css";
+import DropdownMenu from "./DropdownMenu";
 import NavbarButton from "./NavbarButton";
 
 function NavBar() {
+  const menu = [
+    {
+      id: 0,
+      title: "Dataset",
+    },
+    {
+      id: 1,
+      title: "Add",
+    },
+  ];
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-navbar">
       <div className="container-fluid">
@@ -22,28 +34,9 @@ function NavBar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavDarkDropdown">
           <ul className="navbar-nav">
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDarkDropdownMenuLink"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i className="bi bi-person-lines-fill"></i>
-              </a>
-              <ul
-                className="dropdown-menu dropdown-menu-dark"
-                aria-labelledby="navbarDarkDropdownMenuLink"
-              >
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Login
-                  </a>
-                </li>
-              </ul>
-            </li>
+            {menu.map((m) => {
+              return <DropdownMenu key={m.id} title={m.title}></DropdownMenu>;
+            })}
             <NavbarButton
               icon={MapManager.ICON_TYPES.get("SHOP").name}
               action={MapManager.createMarker}
