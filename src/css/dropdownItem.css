@@ -1,0 +1,9 @@
+.dropdown-item-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.dropdown-item-title {
+  margin-left: 10px;
+}
