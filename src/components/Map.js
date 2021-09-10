@@ -13,13 +13,13 @@ import MapManager from "../scripts/MapManager";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import LoadingOverlay from "./LoadingOverlay";
+import MarkerPopupInfo from "./MarkerPopupInfo";
 
 function Map() {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [markers, setMarkers] = useState([]);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showLoadOverlay, setShowLoadOverlay] = useState(true);
-  const [map, setMap] = useState(null);
   const [clickCoords, setClickCoords] = useState([]);
   const defaultCenter = [38.9072, -77.0369];
   const defaultZoom = 4;
@@ -44,13 +44,14 @@ function Map() {
           console.log(error);
         });
     }
-    MapManager.enableMapControls(map);
+    MapManager.enableMapControls();
     setShowInfoModal(false);
     MapManager.setCurrentAction(MapManager.ACTIONS.NONE);
   };
 
+  const showMarkerDetails = (markerData) => {};
+
   const getMapAccessor = (map) => {
-    setMap(map);
     MapManager.setMap(map);
     MapManager.disableMapControls();
   };
@@ -69,7 +70,6 @@ function Map() {
           values.forEach((countryInfo) => {
             mapMarkers.push(countryInfo.data);
           });
-          console.log(mapMarkers);
           setMarkers(mapMarkers);
           setShowLoadOverlay(false);
           MapManager.enableMapControls();
@@ -84,19 +84,24 @@ function Map() {
       {showInfoModal ? (
         <MarkerInfoModal
           show={showInfoModal}
-          map={map}
           markerCoords={clickCoords}
           onCloseModal={infoModalClosedCallback}
         ></MarkerInfoModal>
       ) : null}
       <LayerGroup>
-        {markers.map((m) => {
+        {markers.map((markerData) => {
           return (
             <Marker
-              key={`${m.names.continent}_${m.names.name}`}
-              position={[m.maps.lat, m.maps.long]}
+              title={markerData.names.name}
+              key={`${markerData.names.continent}_${markerData.names.name}`}
+              position={[markerData.maps.lat, markerData.maps.long]}
             >
-              <Popup>{m.description}</Popup>
+              <Popup>
+                <MarkerPopupInfo
+                  data={markerData}
+                  onShowDetails={showMarkerDetails}
+                ></MarkerPopupInfo>
+              </Popup>
             </Marker>
           );
         })}
