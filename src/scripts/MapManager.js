@@ -1,13 +1,15 @@
 class MapManagement {
   #currentState;
+  #map;
   constructor() {
-    this.STATES = {
+    this.ACTIONS = {
       NONE: 0,
       ADD_MARKER: 1,
       SET_MARKER_INFO: 2,
+      SHOW_MARKER_INFO: 3,
     };
     this.ICON_TYPES = new Map();
-    this.#currentState = this.STATES.NONE;
+    this.#currentState = this.ACTIONS.NONE;
     if (this.instance === null) {
       MapManagement.instance = this;
     }
@@ -16,9 +18,11 @@ class MapManagement {
 
   initialize() {
     this.ICON_TYPES.set("SHOP", { type: 0, name: "shop" });
-    this.ICON_TYPES.set("MARKER", { type: 1, name: "geo-alt-fill" });
+    this.ICON_TYPES.set("MARKER", { type: 1, name: "geo-alt" });
     this.ICON_TYPES.set("CATEGORY", { type: 2, name: "tags" });
     this.ICON_TYPES.set("SETTINGS", { type: 3, name: "gear" });
+    this.ICON_TYPES.set("DATA", { type: 4, name: "file-earmark-bar-graph" });
+    this.ICON_TYPES.set("MARKER-PIN", { type: 5, name: "geo" });
   }
 
   getCurrentState() {
@@ -29,32 +33,35 @@ class MapManagement {
     this.#currentState = state;
   }
 
-  createMarker() {
-    let me = this === undefined ? MapManager : this;
-    me.#currentState = me.STATES.ADD_MARKER;
+  getMap() {
+    return this.#map;
   }
 
-  disableMapControls(map) {
-    map.dragging.disable();
-    map.touchZoom.disable();
-    map.doubleClickZoom.disable();
-    map.scrollWheelZoom.disable();
-    map.boxZoom.disable();
-    map.keyboard.disable();
-    if (map.tap) {
-      map.tap.disable();
+  setMap(map) {
+    this.#map = map;
+  }
+
+  disableMapControls() {
+    this.#map.dragging.disable();
+    this.#map.touchZoom.disable();
+    this.#map.doubleClickZoom.disable();
+    this.#map.scrollWheelZoom.disable();
+    this.#map.boxZoom.disable();
+    this.#map.keyboard.disable();
+    if (this.#map.tap) {
+      this.#map.tap.disable();
     }
   }
 
-  enableMapControls(map) {
-    map.dragging.enable();
-    map.touchZoom.enable();
-    map.doubleClickZoom.enable();
-    map.scrollWheelZoom.enable();
-    map.boxZoom.enable();
-    map.keyboard.enable();
-    if (map.tap) {
-      map.tap.enable();
+  enableMapControls() {
+    this.#map.dragging.enable();
+    this.#map.touchZoom.enable();
+    this.#map.doubleClickZoom.enable();
+    this.#map.scrollWheelZoom.enable();
+    this.#map.boxZoom.enable();
+    this.#map.keyboard.enable();
+    if (this.#map.tap) {
+      this.#map.tap.enable();
     }
   }
 }
