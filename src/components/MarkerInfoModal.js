@@ -1,12 +1,28 @@
+import { useState } from "react";
 import "./../css/markerInfoModal.css";
 
 function MarkerInfoModal(props) {
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [stars, setStars] = useState();
+
   const handleClose = (e) => {
     let saveData = false;
+    let markerData;
+    let coords = {
+      lat: props.markerCoords[0],
+      lng: props.markerCoords[1],
+    };
     if (e.target.id === "save") {
       saveData = true;
+      markerData = {
+        name: name,
+        description: description,
+        stars: 3,
+        coords: coords,
+      };
     }
-    props?.onCloseModal(saveData);
+    props?.onCloseModal(saveData, markerData);
   };
 
   return (
@@ -27,7 +43,12 @@ function MarkerInfoModal(props) {
             <label htmlFor="poiName" className="form-label">
               Name
             </label>
-            <input type="text" className="form-control" id="poiName" />
+            <input
+              type="text"
+              className="form-control"
+              id="poiName"
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
           <div className="mb-3">
             <label htmlFor="poiDescription" className="form-label">
@@ -37,6 +58,7 @@ function MarkerInfoModal(props) {
               className="form-control"
               id="poiDescription"
               rows="3"
+              onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </div>
         </div>
