@@ -11,7 +11,7 @@ function DropdownItem(props) {
   const handleClick = () => {
     switch (props.action) {
       case MapManager.ACTIONS.ADD_MARKER: {
-        MapManager.setCurrentState(MapManager.ACTIONS.ADD_MARKER);
+        MapManager.setCurrentAction(MapManager.ACTIONS.ADD_MARKER);
         break;
       }
       case MapManager.ACTIONS.SHOW_MARKER_INFO: {

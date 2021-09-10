@@ -44,7 +44,7 @@ function Map() {
     }
     MapManager.enableMapControls(map);
     setShowInfoModal(false);
-    MapManager.setCurrentState(MapManager.ACTIONS.NONE);
+    MapManager.setCurrentAction(MapManager.ACTIONS.NONE);
   };
 
   const getMapAccessor = (map) => {

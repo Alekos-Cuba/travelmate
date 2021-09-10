@@ -1,5 +1,5 @@
 class MapManagement {
-  #currentState;
+  #currentAction;
   #map;
   constructor() {
     this.ACTIONS = {
@@ -9,7 +9,7 @@ class MapManagement {
       SHOW_MARKER_INFO: 3,
     };
     this.ICON_TYPES = new Map();
-    this.#currentState = this.ACTIONS.NONE;
+    this.#currentAction = this.ACTIONS.NONE;
     if (this.instance === null) {
       MapManagement.instance = this;
     }
@@ -25,12 +25,12 @@ class MapManagement {
     this.ICON_TYPES.set("MARKER-PIN", { type: 5, name: "geo" });
   }
 
-  getCurrentState() {
-    return this.#currentState;
+  getCurrentAction() {
+    return this.#currentAction;
   }
 
-  setCurrentState(state) {
-    this.#currentState = state;
+  setCurrentAction(state) {
+    this.#currentAction = state;
   }
 
   getMap() {
