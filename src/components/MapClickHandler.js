@@ -19,10 +19,6 @@ function MapClickHandler(props) {
     }
   });
 
-  useEffect(() => {
-    props.onRender(map);
-  }, []);
-
   return null;
 }
 
