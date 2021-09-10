@@ -1,15 +1,16 @@
+import { useEffect } from "react";
 import { useMapEvent } from "react-leaflet";
 import MapManager from "../scripts/MapManager";
 
 function MapClickHandler(props) {
   const map = useMapEvent("click", (e) => {
     let { lat, lng } = e.latlng;
-    let icon;
+    console.log(e.latlng);
     switch (MapManager.getCurrentState()) {
-      case MapManager.STATES.ADD_MARKER: {
-        MapManager.setCurrentState(MapManager.STATES.SET_MARKER_INFO);
-        icon = MapManager.ICON_TYPES.get("MARKER");
-        props?.onMapClicked(icon, lat, lng, map);
+      case MapManager.ACTIONS.ADD_MARKER: {
+        MapManager.disableMapControls(map);
+        MapManager.setCurrentState(MapManager.ACTIONS.SET_MARKER_INFO);
+        props?.onMapClicked(lat, lng);
         break;
       }
       default: {
@@ -17,6 +18,11 @@ function MapClickHandler(props) {
       }
     }
   });
+
+  useEffect(() => {
+    props.onRender(map);
+  }, []);
+
   return null;
 }
 

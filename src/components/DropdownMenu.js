@@ -24,6 +24,7 @@ function DropdownMenu(props) {
                 key={item._id}
                 title={item.title}
                 icon={item.icon}
+                action={item.action}
               ></DropdownItem>
             );
           })}
