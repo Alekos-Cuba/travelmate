@@ -12,15 +12,17 @@ import MarkerInfoModal from "./MarkerInfoModal";
 import MapManager from "../scripts/MapManager";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import LoadingOverlay from "./LoadingOverlay";
 
 function Map() {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [markers, setMarkers] = useState([]);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [showLoadOverlay, setShowLoadOverlay] = useState(true);
   const [map, setMap] = useState(null);
   const [clickCoords, setClickCoords] = useState([]);
   const defaultCenter = [38.9072, -77.0369];
-  const defaultZoom = 8;
+  const defaultZoom = 4;
 
   const mapClickedCallback = (...settings) => {
     let [lat, lng] = [...settings];
@@ -50,18 +52,35 @@ function Map() {
   const getMapAccessor = (map) => {
     setMap(map);
     MapManager.setMap(map);
+    MapManager.disableMapControls();
   };
 
   useEffect(() => {
-    axios.get("http://localhost:5000/poi").then((res) => {
-      if (res.status === 200) {
-        setMarkers(res.data);
+    const countryListPromise = MapManager.getCountries();
+    countryListPromise.then((res) => {
+      if (!res.errorMessage) {
+        const countryPromises = [];
+        const data = res.data;
+        data.forEach((countryData) => {
+          countryPromises.push(MapManager.getCountryInfo(countryData.url));
+        });
+        Promise.all(countryPromises).then((values) => {
+          const mapMarkers = [];
+          values.forEach((countryInfo) => {
+            mapMarkers.push(countryInfo.data);
+          });
+          console.log(mapMarkers);
+          setMarkers(mapMarkers);
+          setShowLoadOverlay(false);
+          MapManager.enableMapControls();
+        });
       }
     });
   }, []);
 
   return (
     <MapContainer center={defaultCenter} zoom={defaultZoom} zoomControl={false}>
+      {showLoadOverlay ? <LoadingOverlay></LoadingOverlay> : null}
       {showInfoModal ? (
         <MarkerInfoModal
           show={showInfoModal}
@@ -73,7 +92,10 @@ function Map() {
       <LayerGroup>
         {markers.map((m) => {
           return (
-            <Marker key={m._id} position={[m.coords.lat, m.coords.lng]}>
+            <Marker
+              key={`${m.names.continent}_${m.names.name}`}
+              position={[m.maps.lat, m.maps.long]}
+            >
               <Popup>{m.description}</Popup>
             </Marker>
           );
@@ -87,11 +109,12 @@ function Map() {
       {isFirstLoad ? (
         <MapConsumer>
           {(map) => {
+            getMapAccessor(map);
             window.navigator.geolocation.getCurrentPosition(
               (res) => {
                 let latitude = res.coords.latitude,
                   longitude = res.coords.longitude;
-                map.flyTo({ lat: latitude, lng: longitude }, 8);
+                map.flyTo({ lat: latitude, lng: longitude }, 4);
                 setIsFirstLoad(false);
               },
               (err) => {
@@ -104,10 +127,7 @@ function Map() {
         </MapConsumer>
       ) : null}
 
-      <MapClickHandler
-        onMapClicked={mapClickedCallback}
-        onRender={getMapAccessor}
-      ></MapClickHandler>
+      <MapClickHandler onMapClicked={mapClickedCallback}></MapClickHandler>
     </MapContainer>
   );
 }
