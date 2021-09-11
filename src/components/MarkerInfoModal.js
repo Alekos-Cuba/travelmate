@@ -4,7 +4,6 @@ import "./../css/markerInfoModal.css";
 function MarkerInfoModal(props) {
   const [name, setName] = useState();
   const [description, setDescription] = useState();
-  const [stars, setStars] = useState();
 
   const handleClose = (e) => {
     let saveData = false;
