@@ -15,12 +15,15 @@ import DetailsCard from "./DetailsCard";
 import CountryInfo from "./CountryInfo";
 import UID from "../scripts/IdGenerator";
 import NavBar from "./../components/NavBar";
+import LocationSearchResults from "./LocationSearchResults";
 
 function Map() {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [markers, setMarkers] = useState([]);
   const [showLoadOverlay, setShowLoadOverlay] = useState(true);
   const [showDetails, setShowDetails] = useState(false);
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const [searchLocations, setSearchLocations] = useState([]);
   const [markerDetails, setMarkerDetails] = useState({});
   const defaultCenter = [38.9072, -77.0369];
   const defaultZoom = 6;
@@ -32,6 +35,15 @@ function Map() {
 
   const handleDetailsClose = () => {
     setShowDetails(false);
+  };
+
+  const handleLocationResults = (locations) => {
+    setSearchLocations(locations);
+    setShowSearchResults(true);
+  };
+
+  const handleSearchResultClose = () => {
+    setShowSearchResults(false);
   };
 
   const getMapAccessor = (map) => {
@@ -71,6 +83,14 @@ function Map() {
             data={markerDetails}
             onDetailsClose={handleDetailsClose}
           />
+        </DetailsCard>
+      ) : null}
+      {showSearchResults ? (
+        <DetailsCard>
+          <LocationSearchResults
+            locations={searchLocations}
+            onCloseSearchResults={handleSearchResultClose}
+          ></LocationSearchResults>
         </DetailsCard>
       ) : null}
       <LayerGroup>
@@ -119,7 +139,10 @@ function Map() {
           }}
         </MapConsumer>
       ) : null}
-      <NavBar countryList={markers}></NavBar>
+      <NavBar
+        countryList={markers}
+        onLocationFound={handleLocationResults}
+      ></NavBar>
     </MapContainer>
   );
 }
