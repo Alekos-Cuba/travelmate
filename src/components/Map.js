@@ -14,15 +14,20 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import LoadingOverlay from "./LoadingOverlay";
 import MarkerPopupInfo from "./MarkerPopupInfo";
+import DetailsCard from "./DetailsCard";
+import CountryInfo from "./CountryInfo";
+import UID from "../scripts/IdGenerator";
 
 function Map() {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [markers, setMarkers] = useState([]);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showLoadOverlay, setShowLoadOverlay] = useState(true);
+  const [showDetails, setShowDetails] = useState(false);
+  const [markerDetails, setMarkerDetails] = useState({});
   const [clickCoords, setClickCoords] = useState([]);
   const defaultCenter = [38.9072, -77.0369];
-  const defaultZoom = 4;
+  const defaultZoom = 8;
 
   const mapClickedCallback = (...settings) => {
     let [lat, lng] = [...settings];
@@ -49,7 +54,10 @@ function Map() {
     MapManager.setCurrentAction(MapManager.ACTIONS.NONE);
   };
 
-  const showMarkerDetails = (markerData) => {};
+  const showMarkerDetails = (markerData) => {
+    setMarkerDetails(markerData);
+    setShowDetails(true);
+  };
 
   const getMapAccessor = (map) => {
     MapManager.setMap(map);
@@ -70,6 +78,7 @@ function Map() {
           values.forEach((countryInfo) => {
             mapMarkers.push(countryInfo.data);
           });
+          console.log(mapMarkers);
           setMarkers(mapMarkers);
           setShowLoadOverlay(false);
           MapManager.enableMapControls();
@@ -81,6 +90,11 @@ function Map() {
   return (
     <MapContainer center={defaultCenter} zoom={defaultZoom} zoomControl={false}>
       {showLoadOverlay ? <LoadingOverlay></LoadingOverlay> : null}
+      {showDetails ? (
+        <DetailsCard>
+          <CountryInfo data={markerDetails} />
+        </DetailsCard>
+      ) : null}
       {showInfoModal ? (
         <MarkerInfoModal
           show={showInfoModal}
@@ -93,7 +107,7 @@ function Map() {
           return (
             <Marker
               title={markerData.names.name}
-              key={`${markerData.names.continent}_${markerData.names.name}`}
+              key={UID.next().value}
               position={[markerData.maps.lat, markerData.maps.long]}
             >
               <Popup>
@@ -119,7 +133,7 @@ function Map() {
               (res) => {
                 let latitude = res.coords.latitude,
                   longitude = res.coords.longitude;
-                map.flyTo({ lat: latitude, lng: longitude }, 4);
+                map.flyTo({ lat: latitude, lng: longitude }, defaultZoom);
                 setIsFirstLoad(false);
               },
               (err) => {
