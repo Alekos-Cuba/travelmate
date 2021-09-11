@@ -1,18 +1,9 @@
 import "./../css/navbar.css";
 import DropdownMenu from "./DropdownMenu";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function NavBar() {
   const [menu, setMenu] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:5000/menu").then((res) => {
-      if (res.status === 200) {
-        setMenu(res.data);
-      }
-    });
-  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-navbar">
