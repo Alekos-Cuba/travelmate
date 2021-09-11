@@ -1,0 +1,16 @@
+.location-result-header,
+.location-result-container {
+  z-index: 600;
+}
+
+.location-result-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.location-result-body {
+  max-height: 300px;
+  overflow-y: auto;
+}
