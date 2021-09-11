@@ -25,7 +25,12 @@ function NavBar(props) {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
+        if (response.data.results?.length > 0) {
+          props.onLocationFound?.({
+            data: response.data.results,
+            keyword: searchText,
+          });
+        }
       })
       .catch(function (error) {
         console.error(error);
