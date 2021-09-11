@@ -59,6 +59,10 @@ function Map() {
     setShowDetails(true);
   };
 
+  const handleDetailsClose = () => {
+    setShowDetails(false);
+  };
+
   const getMapAccessor = (map) => {
     MapManager.setMap(map);
     MapManager.disableMapControls();
@@ -92,7 +96,10 @@ function Map() {
       {showLoadOverlay ? <LoadingOverlay></LoadingOverlay> : null}
       {showDetails ? (
         <DetailsCard>
-          <CountryInfo data={markerDetails} />
+          <CountryInfo
+            data={markerDetails}
+            onDetailsClose={handleDetailsClose}
+          />
         </DetailsCard>
       ) : null}
       {showInfoModal ? (
