@@ -7,7 +7,7 @@ function MarkerPopupInfo(props) {
 
   return (
     <div className="marker-popup-info">
-      <h6>{`${props.data.names.name} (${props.data.names.continent})`}</h6>
+      <h6>{`${props.data.names.name} (${props.data.names.iso3})`}</h6>
       <a href="#" className="card-link" onClick={handleClick}>
         Show all info
       </a>

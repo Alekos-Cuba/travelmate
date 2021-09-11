@@ -1,9 +1,11 @@
+import "./../css/dropdownMenu.css";
+import UID from "../scripts/IdGenerator";
 import DropdownItem from "./DropdownItem";
 
 function DropdownMenu(props) {
   return (
     <div>
-      <li className="nav-item dropdown">
+      <li className="nav-item dropdown dropdown-title">
         <a
           className="nav-link dropdown-toggle"
           href="/"
@@ -15,16 +17,16 @@ function DropdownMenu(props) {
           {props.title}
         </a>
         <ul
-          className="dropdown-menu dropdown-menu-dark"
+          className="dropdown-menu dropdown-menu-dark dropdown-list"
           aria-labelledby="navbarDarkDropdownMenuLink"
         >
           {props.items?.map((item) => {
             return (
               <DropdownItem
-                key={item._id}
-                title={item.title}
-                icon={item.icon}
-                action={item.action}
+                key={UID.next().value}
+                title={item.names.name}
+                coords={item.maps}
+                zoom={item.maps.zoom}
               ></DropdownItem>
             );
           })}
@@ -35,3 +37,5 @@ function DropdownMenu(props) {
 }
 
 export default DropdownMenu;
+
+/**/
