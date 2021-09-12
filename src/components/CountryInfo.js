@@ -86,7 +86,7 @@ function CountryInfo(props) {
           target="_blank"
           rel="noreferrer"
         >
-          Official website
+          CA Travel website
         </a>
       </div>
     </div>
