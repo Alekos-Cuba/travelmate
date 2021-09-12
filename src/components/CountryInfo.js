@@ -23,7 +23,7 @@ function CountryInfo(props) {
           ></button>
         </div>
         <h6 className="card-subtitle mb-2 text-muted">
-          {`${props.data.names.full} (Continent: ${props.data.names.continent})`}
+          {`${props.data.names.full} (Continent: ${props.data.names?.continent})`}
         </h6>
         <Accordion id="countryInfoAccordion">
           <AccordionItem
@@ -81,7 +81,7 @@ function CountryInfo(props) {
         </Accordion>
         <br />
         <a
-          href={props.data.advise.CA.url}
+          href={props.data.advise?.CA?.url}
           className="card-link"
           target="_blank"
           rel="noreferrer"
