@@ -1,5 +1,5 @@
-import "./../css/dropdownMenu.css";
-import UID from "../scripts/IdGenerator";
+import "./../../css/dropdownMenu.css";
+import UID from "../../scripts/IdGenerator";
 import DropdownItem from "./DropdownItem";
 
 function DropdownMenu(props) {

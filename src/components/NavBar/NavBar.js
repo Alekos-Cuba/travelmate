@@ -1,7 +1,7 @@
 import "./../../css/navbar.css";
 import { useState } from "react";
 import axios from "axios";
-import DropdownMenu from "../DropdownMenu";
+import DropdownMenu from "../Dropdown/DropdownMenu";
 import OffcanvasMenu from "../LeftMenu/OffcanvasMenu";
 import NavBarActionButton from "./NavBarActionButton";
 

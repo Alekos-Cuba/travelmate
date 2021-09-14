@@ -1,10 +1,11 @@
-import "./../css/dropdownItem.css";
-import MapManager from "../scripts/MapManager";
+import "./../../css/dropdownItem.css";
+import MapManager from "../../scripts/MapManager";
 
 function DropdownItem(props) {
+  const zoom = props.zoom < 5 ? 5 : props.zoom;
   const handleClick = () => {
     const { lat, long } = props.coords;
-    MapManager.getMap().flyTo({ lat: lat, lng: long }, props.zoom);
+    MapManager.getMap().flyTo({ lat: lat, lng: long }, zoom);
   };
 
   return (
