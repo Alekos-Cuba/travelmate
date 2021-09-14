@@ -1,4 +1,4 @@
-import UID from "../scripts/IdGenerator";
+import UID from "./../../scripts/IdGenerator";
 
 function AccordionItemLanguages(props) {
   return (

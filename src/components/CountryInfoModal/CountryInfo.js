@@ -1,4 +1,4 @@
-import "./../css/countryInfo.css";
+import "./../../css/countryInfo.css";
 import Accordion from "./Accordion";
 import AccordionItem from "./AccordionItem";
 import AccordionItemObjectDataType from "./AccordionItemObjectDataType";
