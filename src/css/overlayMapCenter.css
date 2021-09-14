@@ -1,0 +1,10 @@
+.map-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.map-center-text {
+  color: firebrick;
+  font-weight: bold;
+}
