@@ -11,6 +11,8 @@ import MapManager from "../scripts/MapManager";
 import { useEffect, useState } from "react";
 import MarkerPopupInfo from "./MarkerPopupInfo";
 import UID from "../scripts/IdGenerator";
+import Overlay from "./Overlay/Overlay";
+import OverlayMapCenter from "./Overlay/OverlayMapCenter";
 
 function Map(props) {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
@@ -26,6 +28,11 @@ function Map(props) {
 
   return (
     <MapContainer center={defaultCenter} zoom={defaultZoom} zoomControl={false}>
+      {props.showMapCenter ? (
+        <Overlay>
+          <OverlayMapCenter />
+        </Overlay>
+      ) : null}
       <LayerGroup>
         {props.markers.map((markerData) => {
           if (markerData) {
