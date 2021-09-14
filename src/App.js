@@ -2,16 +2,19 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import Map from "./components/Map";
 import MapManager from "./scripts/MapManager";
-import LoadingOverlay from "./components/LoadingOverlay";
+import Overlay from "./components/Overlay/Overlay";
 import DetailsCard from "./components/DetailsCard";
-import CountryInfo from "./components/CountryInfo";
-import NavBar from "./components/NavBar";
+import CountryInfo from "./components/CountryInfoModal/CountryInfo";
+import NavBar from "./components/NavBar/NavBar";
 import LocationSearchResults from "./components/LocationSearchResults";
+import OffcanvasMenu from "./components/LeftMenu/OffcanvasMenu";
+import OverlayLoading from "./components/Overlay/OverlayLoading";
 
 function App() {
   const [markers, setMarkers] = useState([]);
   const [showLoadOverlay, setShowLoadOverlay] = useState(true);
   const [showDetails, setShowDetails] = useState(false);
+  const [showMapCenter, setShowMapCenter] = useState(false);
   const [markerDetails, setMarkerDetails] = useState({});
   const [searchLocations, setSearchLocations] = useState([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -50,6 +53,7 @@ function App() {
           console.log(mapMarkers);
           setMarkers(mapMarkers);
           setShowLoadOverlay(false);
+          setShowMapCenter(true);
           MapManager.enableMapControls();
         });
       }
@@ -62,7 +66,16 @@ function App() {
         countryList={markers}
         onLocationFound={handleLocationResults}
       ></NavBar>
-      {showLoadOverlay ? <LoadingOverlay></LoadingOverlay> : null}
+      <OffcanvasMenu
+        position="start"
+        id="offCanvasLeftMenu"
+        title="Find nearby places"
+      ></OffcanvasMenu>
+      {showLoadOverlay ? (
+        <Overlay backgroundColor="rgba(0, 0, 0, 0.7)" fullScreen={true}>
+          <OverlayLoading></OverlayLoading>
+        </Overlay>
+      ) : null}
       {showDetails ? (
         <DetailsCard>
           <CountryInfo
@@ -79,7 +92,11 @@ function App() {
           ></LocationSearchResults>
         </DetailsCard>
       ) : null}
-      <Map markers={markers} onShowMarkerDetails={showMarkerDetails}></Map>
+      <Map
+        markers={markers}
+        onShowMarkerDetails={showMarkerDetails}
+        showMapCenter={showMapCenter}
+      ></Map>
     </div>
   );
 }
