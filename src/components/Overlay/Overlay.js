@@ -5,9 +5,8 @@ function Overlay(props) {
     backgroundColor: props.backgroundColor,
     width: props.fullScreen ? "100%" : "200px",
     height: props.fullScreen ? "100%" : "100px",
-    top: props.fullScreen ? 0 : "50%",
-    left: props.fullScreen ? 0 : "50%",
-    justifyContent: props.fullScreen ? "center" : "left",
+    top: props.fullScreen ? 0 : "calc(50% - 45px)",
+    left: props.fullScreen ? 0 : "calc(50% - 100px)",
   };
   return (
     <div className="overlay" style={style}>
