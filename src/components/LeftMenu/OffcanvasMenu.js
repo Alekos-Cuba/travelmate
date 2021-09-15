@@ -15,7 +15,7 @@ const OffcanvasMenu = (props) => {
           aria-label="Close"
         ></button>
       </div>
-      <div className="offcanvas-body">...</div>
+      <div className="offcanvas-body">{props.children}</div>
     </div>
   );
 };
