@@ -4,27 +4,10 @@ class MapManagement {
   #currentAction;
   #map;
   constructor() {
-    this.ACTIONS = {
-      NONE: 0,
-      ADD_MARKER: 1,
-      SET_MARKER_INFO: 2,
-      SHOW_MARKER_INFO: 3,
-    };
-    this.ICON_TYPES = new Map();
-    this.#currentAction = this.ACTIONS.NONE;
     if (this.instance === null) {
       MapManagement.instance = this;
     }
     return MapManagement.instance;
-  }
-
-  initialize() {
-    this.ICON_TYPES.set("SHOP", { type: 0, name: "shop" });
-    this.ICON_TYPES.set("MARKER", { type: 1, name: "geo-alt" });
-    this.ICON_TYPES.set("CATEGORY", { type: 2, name: "tags" });
-    this.ICON_TYPES.set("SETTINGS", { type: 3, name: "gear" });
-    this.ICON_TYPES.set("DATA", { type: 4, name: "file-earmark-bar-graph" });
-    this.ICON_TYPES.set("MARKER-PIN", { type: 5, name: "geo" });
   }
 
   getCurrentAction() {
@@ -89,5 +72,4 @@ class MapManagement {
 }
 
 const MapManager = new MapManagement();
-MapManager.initialize();
 export default MapManager;
