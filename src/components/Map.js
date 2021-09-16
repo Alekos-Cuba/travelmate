@@ -8,7 +8,7 @@ import {
   Popup,
 } from "react-leaflet";
 import MapManager from "../scripts/MapManager";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MarkerPopupInfo from "./MarkerPopupInfo";
 import UID from "../scripts/IdGenerator";
 import Overlay from "./Overlay/Overlay";
@@ -23,8 +23,6 @@ function Map(props) {
     MapManager.setMap(map);
     MapManager.disableMapControls();
   };
-
-  useEffect(() => {}, []);
 
   return (
     <MapContainer center={defaultCenter} zoom={defaultZoom} zoomControl={false}>

@@ -16,20 +16,10 @@ function App() {
   const [showDetails, setShowDetails] = useState(false);
   const [showMapCenter, setShowMapCenter] = useState(false);
   const [markerDetails, setMarkerDetails] = useState({});
-  const [searchLocations, setSearchLocations] = useState([]);
-  const [showSearchResults, setShowSearchResults] = useState(false);
-  const handleSearchResultClose = () => {
-    setShowSearchResults(false);
-  };
 
   const showMarkerDetails = (markerData) => {
     setMarkerDetails(markerData);
     setShowDetails(true);
-  };
-
-  const handleLocationResults = (locations) => {
-    setSearchLocations(locations);
-    setShowSearchResults(true);
   };
 
   const handleDetailsClose = () => {
@@ -62,10 +52,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar
-        countryList={markers}
-        onLocationFound={handleLocationResults}
-      ></NavBar>
+      <NavBar countryList={markers}></NavBar>
       <OffcanvasMenu
         position="start"
         id="offCanvasLeftMenu"
@@ -82,14 +69,6 @@ function App() {
             data={markerDetails}
             onDetailsClose={handleDetailsClose}
           />
-        </DetailsCard>
-      ) : null}
-      {showSearchResults ? (
-        <DetailsCard>
-          <LocationSearchResults
-            locations={searchLocations}
-            onCloseSearchResults={handleSearchResultClose}
-          ></LocationSearchResults>
         </DetailsCard>
       ) : null}
       <Map

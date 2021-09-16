@@ -1,21 +1,12 @@
 import axios from "axios";
 
 class MapManagement {
-  #currentAction;
   #map;
   constructor() {
     if (this.instance === null) {
       MapManagement.instance = this;
     }
     return MapManagement.instance;
-  }
-
-  getCurrentAction() {
-    return this.#currentAction;
-  }
-
-  setCurrentAction(state) {
-    this.#currentAction = state;
   }
 
   getMap() {

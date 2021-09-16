@@ -37,5 +37,3 @@ function DropdownMenu(props) {
 }
 
 export default DropdownMenu;
-
-/**/

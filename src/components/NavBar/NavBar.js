@@ -1,8 +1,6 @@
 import "./../../css/navbar.css";
-import { useState } from "react";
 import axios from "axios";
 import DropdownMenu from "../Dropdown/DropdownMenu";
-import OffcanvasMenu from "../LeftMenu/OffcanvasMenu";
 import NavBarActionButton from "./NavBarActionButton";
 
 function NavBar(props) {
@@ -26,12 +24,11 @@ function NavBar(props) {
       .request(options)
       .then(function (response) {
         console.log(response);
-        /*if (response.data.results?.length > 0) {
+        if (response.data.results?.length > 0) {
           props.onLocationFound?.({
             data: response.data.results,
-            keyword: searchText,
           });
-        }*/
+        }
       })
       .catch(function (error) {
         console.error(error);
