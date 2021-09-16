@@ -7,12 +7,12 @@ import {
   LayerGroup,
   Popup,
 } from "react-leaflet";
-import MapManager from "../scripts/MapManager";
+import MapManager from "../../scripts/MapManager";
 import { useState } from "react";
-import MarkerPopupInfo from "./MarkerPopupInfo";
-import UID from "../scripts/IdGenerator";
-import Overlay from "./Overlay/Overlay";
-import OverlayMapCenter from "./Overlay/OverlayMapCenter";
+import MarkerPopupInfo from "../MarkerPopupInfo";
+import UID from "../../scripts/IdGenerator";
+import Overlay from "../Overlay/Overlay";
+import OverlayMapCenter from "../Overlay/OverlayMapCenter";
 
 function Map(props) {
   const [isFirstLoad, setIsFirstLoad] = useState(true);

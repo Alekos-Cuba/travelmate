@@ -4,7 +4,7 @@ import DropdownItem from "./DropdownItem";
 
 function DropdownMenu(props) {
   return (
-    <div>
+    <>
       <li className="nav-item dropdown dropdown-title">
         <a
           className="nav-link dropdown-toggle"
@@ -32,7 +32,7 @@ function DropdownMenu(props) {
           })}
         </ul>
       </li>
-    </div>
+    </>
   );
 }
 

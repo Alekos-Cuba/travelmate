@@ -1,12 +1,11 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import Map from "./components/Map";
+import Map from "./components/Map/Map";
 import MapManager from "./scripts/MapManager";
 import Overlay from "./components/Overlay/Overlay";
-import DetailsCard from "./components/DetailsCard";
+import DetailsCard from "./components/Wrappers/DetailsCard";
 import CountryInfo from "./components/CountryInfoModal/CountryInfo";
 import NavBar from "./components/NavBar/NavBar";
-import LocationSearchResults from "./components/LocationSearchResults";
 import OffcanvasMenu from "./components/LeftMenu/OffcanvasMenu";
 import OverlayLoading from "./components/Overlay/OverlayLoading";
 

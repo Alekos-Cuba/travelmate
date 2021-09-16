@@ -9,7 +9,7 @@ function DropdownItem(props) {
   };
 
   return (
-    <div>
+    <>
       <li>
         <a className="dropdown-item" href="#" onClick={handleClick}>
           <div className="dropdown-item-content">
@@ -17,7 +17,7 @@ function DropdownItem(props) {
           </div>
         </a>
       </li>
-    </div>
+    </>
   );
 }
 
