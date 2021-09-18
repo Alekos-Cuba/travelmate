@@ -1,4 +1,4 @@
-import "./../../css/overlay.css";
+import styles from "./../../css/overlay.module.css";
 
 function Overlay(props) {
   const style = {
@@ -9,7 +9,7 @@ function Overlay(props) {
     left: props.fullScreen ? 0 : "calc(50% - 100px)",
   };
   return (
-    <div className="overlay" style={style}>
+    <div className={styles.overlay} style={style}>
       {props.children}
     </div>
   );

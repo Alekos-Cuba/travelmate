@@ -1,4 +1,4 @@
-import "./../../css/overlayMapCenter.css";
+import styles from "./../../css/overlayMapCenter.module.css";
 import { useMapEvent } from "react-leaflet";
 import { useState } from "react";
 
@@ -11,8 +11,8 @@ const OverlayMapCenter = (props) => {
   });
 
   return (
-    <div className="bi bi-plus-lg map-center">
-      <div className="map-center-text">{mapCenter}</div>
+    <div className={`bi bi-plus-lg ${styles.mapCenter}`}>
+      <div className={styles.mapCenterText}>{mapCenter}</div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import "./../css/markerPopupInfo.css";
+import styles from "./../css/markerPopupInfo.module.css";
 
 function MarkerPopupInfo(props) {
   const handleClick = () => {
@@ -6,7 +6,7 @@ function MarkerPopupInfo(props) {
   };
 
   return (
-    <div className="marker-popup-info">
+    <div className={styles.markerPopupInfo}>
       <h6>{`${props.data.names.name} (${props.data.names.iso3})`}</h6>
       <a href="#" className="card-link" onClick={handleClick}>
         Show all info

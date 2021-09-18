@@ -1,4 +1,4 @@
-import "./../../css/navbar.css";
+import styles from "./../../css/navbar.module.css";
 import axios from "axios";
 import DropdownMenu from "../Dropdown/DropdownMenu";
 import NavBarActionButton from "./NavBarActionButton";
@@ -37,7 +37,9 @@ function NavBar(props) {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-navbar">
+      <nav
+        className={`navbar navbar-expand-lg navbar-dark bg-dark ${styles.fixedNavbar}`}
+      >
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             Tools

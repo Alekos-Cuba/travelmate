@@ -1,7 +1,7 @@
-import "./../../css/detailsCard.css";
+import styles from "./../../css/detailsCard.module.css";
 
 function DetailsCard(props) {
-  return <div className="details-card">{props.children}</div>;
+  return <div className={styles.detailsCard}>{props.children}</div>;
 }
 
 export default DetailsCard;

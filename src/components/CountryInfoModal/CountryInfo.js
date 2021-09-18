@@ -1,4 +1,4 @@
-import "./../../css/countryInfo.css";
+import styles from "./../../css/countryInfo.module.css";
 import Accordion from "./Accordion";
 import AccordionItem from "./AccordionItem";
 import AccordionItemObjectDataType from "./AccordionItemObjectDataType";
@@ -11,9 +11,9 @@ function CountryInfo(props) {
   };
 
   return (
-    <div className="card text-white bg-dark mb-3 country-info">
+    <div className={`card text-white bg-dark mb-3 ${styles.countryInfo}`}>
       <div className="card-body">
-        <div className="country-info-header">
+        <div className={styles.countryInfoHeader}>
           <h5 className="card-title">{props.data.names.name}</h5>
           <button
             type="button"

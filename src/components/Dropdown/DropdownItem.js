@@ -1,4 +1,4 @@
-import "./../../css/dropdownItem.css";
+import styles from "./../../css/dropdownItem.module.css";
 import MapManager from "../../scripts/MapManager";
 
 function DropdownItem(props) {
@@ -12,8 +12,8 @@ function DropdownItem(props) {
     <>
       <li>
         <a className="dropdown-item" href="#" onClick={handleClick}>
-          <div className="dropdown-item-content">
-            <span className="dropdown-item-title">{props.title}</span>
+          <div className={styles.dropdownItemContent}>
+            <span className={styles.dropdownItemTitle}>{props.title}</span>
           </div>
         </a>
       </li>

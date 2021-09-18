@@ -1,9 +1,9 @@
-.country-info {
+.countryInfo {
   width: 25rem;
   z-index: 600;
 }
 
-.country-info-header {
+.countryInfoHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

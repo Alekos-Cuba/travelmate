@@ -1,8 +1,8 @@
-.dropdown-title {
+.dropdownTitle {
   font-size: medium;
 }
 
-.dropdown-list {
+.dropdownList {
   max-height: 25rem;
   overflow-y: auto;
 }

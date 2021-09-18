@@ -69,7 +69,6 @@ function Map(props) {
                 setIsFirstLoad(false);
               },
               (err) => {
-                alert("Failed to retrieve geolocation");
                 setIsFirstLoad(false);
               }
             );

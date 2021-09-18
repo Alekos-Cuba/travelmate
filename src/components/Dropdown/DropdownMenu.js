@@ -1,11 +1,11 @@
-import "./../../css/dropdownMenu.css";
+import styles from "./../../css/dropdownMenu.module.css";
 import UID from "../../scripts/IdGenerator";
 import DropdownItem from "./DropdownItem";
 
 function DropdownMenu(props) {
   return (
     <>
-      <li className="nav-item dropdown dropdown-title">
+      <li className={`nav-item dropdown ${styles.dropdownTitle}`}>
         <a
           className="nav-link dropdown-toggle"
           href="/"
@@ -17,7 +17,7 @@ function DropdownMenu(props) {
           {props.title}
         </a>
         <ul
-          className="dropdown-menu dropdown-menu-dark dropdown-list"
+          className={`dropdown-menu dropdown-menu-dark ${styles.dropdownList}`}
           aria-labelledby="navbarDarkDropdownMenuLink"
         >
           {props.items?.map((item) => {
