@@ -44,7 +44,7 @@ function NavBar(props) {
           <a className="navbar-brand" href="#">
             Tools
           </a>
-          <div className="collapse navbar-collapse">
+          <div className="collapsed navbar-collapse">
             <ul className="navbar-nav">
               <DropdownMenu title="Fast travel"></DropdownMenu>
             </ul>

@@ -29,26 +29,35 @@ function App() {
 
   useEffect(() => {
     const countryListPromise = MapManager.getCountries();
-    countryListPromise.then((res) => {
+    countryListPromise.then(async (res) => {
       if (!res.errorMessage) {
         const countryPromises = [];
         const data = res.data;
         data.forEach((countryData) => {
           countryPromises.push(MapManager.getCountryInfo(countryData.url));
         });
-        Promise.all(countryPromises).then((values) => {
-          const mapMarkers = [];
-          values.forEach((countryInfo) => {
-            mapMarkers.push(countryInfo.data);
-          });
+        try {
+          const countriesInfoFromURL = await Promise.all(countryPromises);
+          let countriesWithData = countriesInfoFromURL
+            .filter((countryInfo) => {
+              return (
+                !("errorMessage" in countryInfo) || countryInfo === undefined
+              );
+            })
+            .map((countryInfo) => {
+              return countryInfo.data;
+            });
+          //console.log(countriesWithData);
           setShowLoadOverlay(false);
           setShowMapCenter(true);
           MapManager.enableMapControls();
-          dispatch(setCountries(mapMarkers));
-        });
+          dispatch(setCountries(countriesWithData));
+        } catch (err) {
+          console.log(err);
+        }
       }
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">
