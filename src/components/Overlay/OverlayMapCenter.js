@@ -1,18 +1,25 @@
 import styles from "./../../css/overlayMapCenter.module.css";
-import { useMapEvent } from "react-leaflet";
-import { useState } from "react";
+import { useMapEvents } from "react-leaflet";
+import { useDispatch, useSelector } from "react-redux";
+import { setMapCenter } from "../../redux/actions/mapActions";
 
 const OverlayMapCenter = (props) => {
-  const [mapCenter, setMapCenter] = useState("");
+  const dispatch = useDispatch();
+  const mapCenter = useSelector((state) => state.map);
 
-  const map = useMapEvent("move", () => {
-    const { lat, lng } = map.getCenter();
-    setMapCenter(`[${lat.toFixed(3)}, ${lng.toFixed(3)}]`);
+  const map = useMapEvents({
+    move() {},
+    moveend() {
+      const { lat, lng } = map.getCenter();
+      dispatch(setMapCenter({ lat: lat.toFixed(3), lng: lng.toFixed(3) }));
+    },
   });
 
   return (
     <div className={`bi bi-plus-lg ${styles.mapCenter}`}>
-      <div className={styles.mapCenterText}>{mapCenter}</div>
+      <div
+        className={styles.mapCenterText}
+      >{`[${mapCenter.lat}, ${mapCenter.lng}]`}</div>
     </div>
   );
 };
