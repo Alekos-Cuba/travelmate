@@ -1,8 +1,11 @@
 import styles from "./../../css/dropdownMenu.module.css";
 import UID from "../../scripts/IdGenerator";
 import DropdownItem from "./DropdownItem";
+import { useSelector } from "react-redux";
 
 function DropdownMenu(props) {
+  const countries = useSelector((state) => state.countries);
+
   return (
     <>
       <li className={`nav-item dropdown ${styles.dropdownTitle}`}>
@@ -20,7 +23,7 @@ function DropdownMenu(props) {
           className={`dropdown-menu dropdown-menu-dark ${styles.dropdownList}`}
           aria-labelledby="navbarDarkDropdownMenuLink"
         >
-          {props.items?.map((item) => {
+          {countries.map((item) => {
             return (
               <DropdownItem
                 key={UID.next().value}

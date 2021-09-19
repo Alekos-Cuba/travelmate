@@ -13,8 +13,10 @@ import MarkerPopupInfo from "../MarkerPopupInfo";
 import UID from "../../scripts/IdGenerator";
 import Overlay from "../Overlay/Overlay";
 import OverlayMapCenter from "../Overlay/OverlayMapCenter";
+import { useSelector } from "react-redux";
 
 function Map(props) {
+  const countries = useSelector((state) => state.countries);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const defaultCenter = [38.9072, -77.0369];
   const defaultZoom = 6;
@@ -32,7 +34,7 @@ function Map(props) {
         </Overlay>
       ) : null}
       <LayerGroup>
-        {props.markers.map((markerData) => {
+        {countries.map((markerData) => {
           if (markerData) {
             return (
               <Marker

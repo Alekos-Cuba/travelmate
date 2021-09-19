@@ -46,10 +46,7 @@ function NavBar(props) {
           </a>
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav">
-              <DropdownMenu
-                title="Fast travel"
-                items={props.countryList}
-              ></DropdownMenu>
+              <DropdownMenu title="Fast travel"></DropdownMenu>
             </ul>
             <NavBarActionButton
               icon="pin-map"

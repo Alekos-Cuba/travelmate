@@ -8,13 +8,15 @@ import CountryInfo from "./components/CountryInfoModal/CountryInfo";
 import NavBar from "./components/NavBar/NavBar";
 import OffcanvasMenu from "./components/LeftMenu/OffcanvasMenu";
 import OverlayLoading from "./components/Overlay/OverlayLoading";
+import { setCountries } from "./redux/actions/countryActions";
+import { useDispatch } from "react-redux";
 
 function App() {
-  const [markers, setMarkers] = useState([]);
   const [showLoadOverlay, setShowLoadOverlay] = useState(true);
   const [showDetails, setShowDetails] = useState(false);
   const [showMapCenter, setShowMapCenter] = useState(false);
   const [markerDetails, setMarkerDetails] = useState({});
+  const dispatch = useDispatch();
 
   const showMarkerDetails = (markerData) => {
     setMarkerDetails(markerData);
@@ -39,11 +41,10 @@ function App() {
           values.forEach((countryInfo) => {
             mapMarkers.push(countryInfo.data);
           });
-          console.log(mapMarkers);
-          setMarkers(mapMarkers);
           setShowLoadOverlay(false);
           setShowMapCenter(true);
           MapManager.enableMapControls();
+          dispatch(setCountries(mapMarkers));
         });
       }
     });
@@ -51,7 +52,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar countryList={markers}></NavBar>
+      <NavBar></NavBar>
       <OffcanvasMenu
         position="start"
         id="offCanvasLeftMenu"
@@ -71,7 +72,6 @@ function App() {
         </DetailsCard>
       ) : null}
       <Map
-        markers={markers}
         onShowMarkerDetails={showMarkerDetails}
         showMapCenter={showMapCenter}
       ></Map>
