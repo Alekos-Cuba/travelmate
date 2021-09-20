@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import countryReducer from "./countryReducer";
-import mapReducer from "./mapReducer";
+import mapCenterReducer from "./mapCenterReducer";
 
 const allReducers = combineReducers({
   countries: countryReducer,
-  map: mapReducer,
+  mapCenter: mapCenterReducer,
 });
 
 export default allReducers;

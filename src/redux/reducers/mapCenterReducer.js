@@ -1,4 +1,4 @@
-const mapReducer = (state = {}, action) => {
+const mapCenterReducer = (state = {}, action) => {
   switch (action.type) {
     case "SET_MAP_CENTER": {
       state = { ...action.payload };
@@ -9,4 +9,4 @@ const mapReducer = (state = {}, action) => {
   }
 };
 
-export default mapReducer;
+export default mapCenterReducer;
