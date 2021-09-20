@@ -7,6 +7,7 @@ import DetailsCard from "./components/Wrappers/DetailsCard";
 import CountryInfo from "./components/CountryInfoModal/CountryInfo";
 import NavBar from "./components/NavBar/NavBar";
 import OffcanvasMenu from "./components/LeftMenu/OffcanvasMenu";
+import OffcanvasBodyFindPlaces from "./components/LeftMenu/OffcanvasBodyFindPlaces";
 import OverlayLoading from "./components/Overlay/OverlayLoading";
 import { setCountries } from "./redux/actions/countryActions";
 import { useDispatch } from "react-redux";
@@ -66,7 +67,9 @@ function App() {
         position="start"
         id="offCanvasLeftMenu"
         title="Find nearby places"
-      ></OffcanvasMenu>
+      >
+        <OffcanvasBodyFindPlaces></OffcanvasBodyFindPlaces>
+      </OffcanvasMenu>
       {showLoadOverlay ? (
         <Overlay backgroundColor="rgba(0, 0, 0, 0.7)" fullScreen={true}>
           <OverlayLoading></OverlayLoading>
