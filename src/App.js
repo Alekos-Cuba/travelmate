@@ -12,11 +12,11 @@ import { setCountries } from "./redux/actions/countryActions";
 import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
   const [showLoadOverlay, setShowLoadOverlay] = useState(true);
   const [showDetails, setShowDetails] = useState(false);
   const [showMapCenter, setShowMapCenter] = useState(false);
   const [markerDetails, setMarkerDetails] = useState({});
-  const dispatch = useDispatch();
 
   const showMarkerDetails = (markerData) => {
     setMarkerDetails(markerData);
@@ -50,8 +50,8 @@ function App() {
           //console.log(countriesWithData);
           setShowLoadOverlay(false);
           setShowMapCenter(true);
-          MapManager.enableMapControls();
           dispatch(setCountries(countriesWithData));
+          MapManager.enableMapControls();
         } catch (err) {
           console.log(err);
         }

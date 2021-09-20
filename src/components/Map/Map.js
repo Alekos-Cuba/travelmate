@@ -13,15 +13,17 @@ import MarkerPopupInfo from "../MarkerPopupInfo";
 import UID from "../../scripts/IdGenerator";
 import Overlay from "../Overlay/Overlay";
 import OverlayMapCenter from "../Overlay/OverlayMapCenter";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setMapCenter } from "../../redux/actions/mapActions";
 
 function Map(props) {
+  const dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const defaultCenter = [38.9072, -77.0369];
   const defaultZoom = 6;
 
-  const getMapAccessor = (map) => {
+  const setMapAccessor = (map) => {
     MapManager.setMap(map);
     MapManager.disableMapControls();
   };
@@ -62,16 +64,25 @@ function Map(props) {
       {isFirstLoad ? (
         <MapConsumer>
           {(map) => {
-            getMapAccessor(map);
+            setMapAccessor(map);
             window.navigator.geolocation.getCurrentPosition(
               (res) => {
                 let latitude = res.coords.latitude,
                   longitude = res.coords.longitude;
-                map.flyTo({ lat: latitude, lng: longitude }, defaultZoom);
+                map.setView({ lat: latitude, lng: longitude }, defaultZoom);
                 setIsFirstLoad(false);
+                dispatch(
+                  setMapCenter({
+                    lat: latitude.toFixed(3),
+                    lng: longitude.toFixed(3),
+                  })
+                );
               },
               (err) => {
                 setIsFirstLoad(false);
+                dispatch(
+                  setMapCenter({ lat: defaultCenter[0], lng: defaultCenter[1] })
+                );
               }
             );
             return null;
