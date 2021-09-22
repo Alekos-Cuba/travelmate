@@ -3,13 +3,16 @@ import axios from "axios";
 import ReadOnlyInput from "./ReadOnlyInput";
 import NearbyPlacesSearchResults from "./NearbyPlacesSearchResults";
 import { setNearbyPlaces } from "./../../redux/actions/placesActions";
+import { useState } from "react";
 
 const OffcanvasBodyFindPlaces = () => {
   const dispatch = useDispatch();
   const mapCenter = useSelector((state) => state.mapCenter);
+  const [searching, setSearching] = useState(false);
 
   const handleFindButtonClick = (e) => {
     e.preventDefault();
+    setSearching(true);
     var options = {
       method: "GET",
       url: "https://trueway-places.p.rapidapi.com/FindPlacesNearby",
@@ -31,9 +34,11 @@ const OffcanvasBodyFindPlaces = () => {
           console.log(response.data);
           dispatch(setNearbyPlaces(response.data.results));
         }
+        setSearching(false);
       })
       .catch(function (error) {
         console.error(error);
+        setSearching(false);
       });
   };
 
@@ -57,8 +62,20 @@ const OffcanvasBodyFindPlaces = () => {
             className="btn btn-success mt-2"
             type="submit"
             onClick={handleFindButtonClick}
+            disabled={searching}
           >
-            Find
+            {searching ? (
+              <div>
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Searching...
+              </div>
+            ) : (
+              "Search"
+            )}
           </button>
         </form>
       </div>
