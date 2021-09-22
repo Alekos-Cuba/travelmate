@@ -30,6 +30,7 @@ function DropdownMenu({ title }) {
                 title={item.names.name}
                 coords={item.maps}
                 zoom={item.maps.zoom}
+                flag={item.flag}
               ></DropdownItem>
             );
           })}

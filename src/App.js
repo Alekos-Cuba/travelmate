@@ -1,4 +1,5 @@
 import "./App.css";
+import defaultFlag from "./resources/images/noflag.png";
 import { useEffect, useState } from "react";
 import Map from "./components/Map/Map";
 import MapManager from "./scripts/MapManager";
@@ -46,9 +47,15 @@ function App() {
               );
             })
             .map((countryInfo) => {
-              return countryInfo.data;
+              let flagUrl = countryInfo.data.names.iso2
+                ? `https://www.countryflags.io/${countryInfo.data.names.iso2}/shiny/32.png`
+                : defaultFlag;
+              return {
+                ...countryInfo.data,
+                flag: flagUrl,
+              };
             });
-          //console.log(countriesWithData);
+          console.log(countriesWithData);
           setShowLoadOverlay(false);
           setShowMapCenter(true);
           dispatch(setCountries(countriesWithData));
