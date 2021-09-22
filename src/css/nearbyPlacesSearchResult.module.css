@@ -1,0 +1,4 @@
+.placesContainer {
+  height: 50%;
+  overflow-y: auto;
+}

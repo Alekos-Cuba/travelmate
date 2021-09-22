@@ -1,8 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import ReadOnlyInput from "./ReadOnlyInput";
+import NearbyPlacesSearchResults from "./NearbyPlacesSearchResults";
+import { setNearbyPlaces } from "./../../redux/actions/placesActions";
 
-const OffcanvasBodyFindPlaces = (props) => {
+const OffcanvasBodyFindPlaces = () => {
+  const dispatch = useDispatch();
   const mapCenter = useSelector((state) => state.mapCenter);
 
   const handleFindButtonClick = (e) => {
@@ -24,9 +27,9 @@ const OffcanvasBodyFindPlaces = (props) => {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response);
         if (response.data.results?.length > 0) {
           console.log(response.data);
+          dispatch(setNearbyPlaces(response.data.results));
         }
       })
       .catch(function (error) {
@@ -39,15 +42,15 @@ const OffcanvasBodyFindPlaces = (props) => {
       <div className="container">
         <form>
           <ReadOnlyInput
-            id="latInput"
-            type="text"
-            value={mapCenter.lat}
+            input={{
+              id: "latInput",
+              type: "text",
+              value: mapCenter.lat,
+            }}
             label="Latitude"
           />
           <ReadOnlyInput
-            id="latInput"
-            type="text"
-            value={mapCenter.lng}
+            input={{ id: "latInput", type: "text", value: mapCenter.lng }}
             label="Longitude"
           />
           <button
@@ -59,6 +62,7 @@ const OffcanvasBodyFindPlaces = (props) => {
           </button>
         </form>
       </div>
+      <NearbyPlacesSearchResults />
     </>
   );
 };
