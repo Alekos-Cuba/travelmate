@@ -45,7 +45,7 @@ const OffcanvasBodyFindPlaces = () => {
   };
 
   const clearResults = (e) => {
-    e.preventDefault();
+    e?.preventDefault();
     dispatch(setNearbyPlaces([]));
   };
 
