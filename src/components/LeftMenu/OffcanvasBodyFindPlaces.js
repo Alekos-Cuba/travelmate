@@ -34,7 +34,7 @@ const OffcanvasBodyFindPlaces = () => {
           console.log(response.data);
           dispatch(setNearbyPlaces(response.data.results));
         } else {
-          dispatch(setNearbyPlaces([]));
+          clearResults();
         }
         setSearching(false);
       })
@@ -42,6 +42,11 @@ const OffcanvasBodyFindPlaces = () => {
         console.error(error);
         setSearching(false);
       });
+  };
+
+  const clearResults = (e) => {
+    e.preventDefault();
+    dispatch(setNearbyPlaces([]));
   };
 
   return (
@@ -60,25 +65,30 @@ const OffcanvasBodyFindPlaces = () => {
             input={{ id: "latInput", type: "text", value: mapCenter.lng }}
             label="Longitude"
           />
-          <button
-            className="btn btn-success mt-2"
-            type="submit"
-            onClick={handleFindButtonClick}
-            disabled={searching}
-          >
-            {searching ? (
-              <div>
-                <span
-                  className="spinner-border spinner-border-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-                Searching...
-              </div>
-            ) : (
-              "Search"
-            )}
-          </button>
+          <div className="mt-2 d-flex flex-row justify-content-evenly">
+            <button
+              className="btn btn-success"
+              type="submit"
+              onClick={handleFindButtonClick}
+              disabled={searching}
+            >
+              {searching ? (
+                <div>
+                  <span
+                    className="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Searching...
+                </div>
+              ) : (
+                "Search"
+              )}
+            </button>
+            <button className="btn btn-danger" onClick={clearResults}>
+              Clear
+            </button>
+          </div>
         </form>
       </div>
       <NearbyPlacesSearchResults />
