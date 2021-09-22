@@ -33,6 +33,8 @@ const OffcanvasBodyFindPlaces = () => {
         if (response.data.results?.length > 0) {
           console.log(response.data);
           dispatch(setNearbyPlaces(response.data.results));
+        } else {
+          dispatch(setNearbyPlaces([]));
         }
         setSearching(false);
       })
@@ -67,7 +69,7 @@ const OffcanvasBodyFindPlaces = () => {
             {searching ? (
               <div>
                 <span
-                  class="spinner-border spinner-border-sm"
+                  className="spinner-border spinner-border-sm"
                   role="status"
                   aria-hidden="true"
                 ></span>
