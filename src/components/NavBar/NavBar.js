@@ -18,8 +18,12 @@ function NavBar(props) {
             </ul>
             <NavBarActionButton
               icon="pin-map"
-              toggle="offcanvas"
-              target="offCanvasLeftMenu"
+              button={{
+                toggle: "offcanvas",
+                target: "offCanvasLeftMenu",
+                tooltip: "Search nearby places",
+                position: "bottom",
+              }}
             />
           </div>
           <button className="btn btn-info">?</button>
