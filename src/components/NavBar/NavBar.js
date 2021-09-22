@@ -22,6 +22,7 @@ function NavBar(props) {
               target="offCanvasLeftMenu"
             />
           </div>
+          <button className="btn btn-info">?</button>
         </div>
       </nav>
     </>
