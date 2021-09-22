@@ -12,7 +12,7 @@ function DropdownItem({ zoom, coords, title }) {
     <>
       <li>
         <a className="dropdown-item" href="#" onClick={handleClick}>
-          <div className={styles.dropdownItemContent}>
+          <div className="d-flex flex-row justify-content-start">
             <span className={styles.dropdownItemTitle}>{title}</span>
           </div>
         </a>

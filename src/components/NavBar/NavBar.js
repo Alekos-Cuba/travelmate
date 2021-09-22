@@ -6,7 +6,7 @@ function NavBar(props) {
   return (
     <>
       <nav
-        className={`navbar navbar-expand-lg navbar-dark bg-dark ${styles.fixedNavbar}`}
+        className={`navbar navbar-expand-lg navbar-dark bg-dark position-fixed top-0 w-100 ${styles.fixedNavbar}`}
       >
         <div className="container-fluid">
           <a className="navbar-brand" href="#">

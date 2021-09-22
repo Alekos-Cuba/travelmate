@@ -1,12 +1,12 @@
-function NavbarButton(props) {
+function NavbarButton({ action, icon }) {
   return (
     <button
       type="button"
       className="btn btn-dark"
       data-bs-toggle="button"
-      onClick={props.action}
+      onClick={action}
     >
-      <i className={`bi bi-${props.icon}`}></i>
+      <i className={`bi bi-${icon}`}></i>
     </button>
   );
 }

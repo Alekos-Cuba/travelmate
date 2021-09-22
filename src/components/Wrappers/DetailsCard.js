@@ -1,7 +1,9 @@
-import styles from "./../../css/detailsCard.module.css";
-
 function DetailsCard({ children }) {
-  return <div className={styles.detailsCard}>{children}</div>;
+  return (
+    <div className="position-absolute d-flex flex-row justify-content-center align-items-center w-100 vh-100">
+      {children}
+    </div>
+  );
 }
 
 export default DetailsCard;

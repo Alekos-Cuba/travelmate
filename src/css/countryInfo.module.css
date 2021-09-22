@@ -2,9 +2,3 @@
   width: 25rem;
   z-index: 600;
 }
-
-.countryInfoHeader {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}

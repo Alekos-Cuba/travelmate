@@ -13,7 +13,7 @@ function CountryInfo({ data, onDetailsClose }) {
   return (
     <div className={`card text-white bg-dark mb-3 ${styles.countryInfo}`}>
       <div className="card-body">
-        <div className={styles.countryInfoHeader}>
+        <div className="d-flex flex-row justify-content-between">
           <h5 className="card-title">{data.names.name}</h5>
           <button
             type="button"

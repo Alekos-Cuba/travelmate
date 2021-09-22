@@ -20,7 +20,7 @@ function DropdownMenu({ title }) {
           {title}
         </a>
         <ul
-          className={`dropdown-menu dropdown-menu-dark ${styles.dropdownList}`}
+          className={`dropdown-menu dropdown-menu-dark overflow-auto ${styles.dropdownList}`}
           aria-labelledby="navbarDarkDropdownMenuLink"
         >
           {countries.map((item) => {

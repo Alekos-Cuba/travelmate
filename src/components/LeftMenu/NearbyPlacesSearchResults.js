@@ -19,7 +19,7 @@ const NearbyPlacesSearchResults = () => {
 
   return (
     <>
-      <div className={`container mt-4 ${styles.placesContainer}`}>
+      <div className={`container mt-4 overflow-auto ${styles.placesContainer}`}>
         <div className="container-body">{renderNearbyPlaces()}</div>
       </div>
     </>
