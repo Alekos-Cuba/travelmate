@@ -19,6 +19,7 @@ import { setMapCenter } from "../../redux/actions/mapActions";
 function Map({ showMapCenter, onShowMarkerDetails }) {
   const dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
+  const nearbyPlaces = useSelector((state) => state.nearbyPlaces);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const defaultCenter = [38.9072, -77.0369];
   const defaultZoom = 6;
@@ -54,6 +55,19 @@ function Map({ showMapCenter, onShowMarkerDetails }) {
             );
           }
           return {};
+        })}
+      </LayerGroup>
+      <LayerGroup>
+        {nearbyPlaces.map((place) => {
+          return (
+            <Marker
+              title={place.name}
+              key={place.id}
+              position={[place.location.lat, place.location.lng]}
+            >
+              <Popup>{place.name}</Popup>
+            </Marker>
+          );
         })}
       </LayerGroup>
       <TileLayer
