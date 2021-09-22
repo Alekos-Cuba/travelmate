@@ -66,7 +66,7 @@ function App() {
       <OffcanvasMenu
         position="start"
         id="offCanvasLeftMenu"
-        title="Find nearby places"
+        title="Find nearby places (150m)"
       >
         <OffcanvasBodyFindPlaces></OffcanvasBodyFindPlaces>
       </OffcanvasMenu>
