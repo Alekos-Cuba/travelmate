@@ -30,41 +30,56 @@ function App() {
   };
 
   useEffect(() => {
-    const countryListPromise = MapManager.getCountries();
-    countryListPromise.then(async (res) => {
-      if (!res.errorMessage) {
-        const countryPromises = [];
-        const data = res.data;
-        data.forEach((countryData) => {
-          countryPromises.push(MapManager.getCountryInfo(countryData.url));
-        });
-        try {
-          const countriesInfoFromURL = await Promise.all(countryPromises);
-          let countriesWithData = countriesInfoFromURL
-            .filter((countryInfo) => {
-              return (
-                !("errorMessage" in countryInfo) || countryInfo === undefined
-              );
-            })
-            .map((countryInfo) => {
-              let flagUrl = countryInfo.data.names.iso2
-                ? `https://www.countryflags.io/${countryInfo.data.names.iso2}/shiny/32.png`
-                : defaultFlag;
-              return {
-                ...countryInfo.data,
-                flag: flagUrl,
-              };
-            });
-          console.log(countriesWithData);
-          setShowLoadOverlay(false);
-          setShowMapCenter(true);
-          dispatch(setCountries(countriesWithData));
-          MapManager.enableMapControls();
-        } catch (err) {
-          console.log(err);
+    //search for countries info in localStorage first
+    if (localStorage.getItem("countries") !== null) {
+      dispatch(setCountries(JSON.parse(localStorage.getItem("countries"))));
+      setShowLoadOverlay(false);
+      setShowMapCenter(true);
+      setTimeout(() => {
+        MapManager.enableMapControls();
+      }, 1000);
+    } else {
+      const countryListPromise = MapManager.getCountries();
+      countryListPromise.then(async (res) => {
+        if (!res.errorMessage) {
+          const countryPromises = [];
+          const data = res.data;
+          data.forEach((countryData) => {
+            countryPromises.push(MapManager.getCountryInfo(countryData.url));
+          });
+          try {
+            const countriesInfoFromURL = await Promise.all(countryPromises);
+            let countriesWithData = countriesInfoFromURL
+              .filter((countryInfo) => {
+                return (
+                  !("errorMessage" in countryInfo) || countryInfo === undefined
+                );
+              })
+              .map((countryInfo) => {
+                let flagUrl = countryInfo.data.names.iso2
+                  ? `https://www.countryflags.io/${countryInfo.data.names.iso2}/shiny/32.png`
+                  : defaultFlag;
+                return {
+                  ...countryInfo.data,
+                  flag: flagUrl,
+                };
+              });
+            //console.log(countriesWithData);
+            setShowLoadOverlay(false);
+            setShowMapCenter(true);
+            dispatch(setCountries(countriesWithData));
+            MapManager.enableMapControls();
+            //save countries info in localStorage
+            localStorage.setItem(
+              "countries",
+              JSON.stringify(countriesWithData)
+            );
+          } catch (err) {
+            console.log(err);
+          }
         }
-      }
-    });
+      });
+    }
   }, [dispatch]);
 
   return (
