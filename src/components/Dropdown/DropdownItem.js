@@ -1,11 +1,11 @@
 import styles from "./../../css/dropdownItem.module.css";
 import MapManager from "../../scripts/MapManager";
 
-function DropdownItem(props) {
-  const zoom = props.zoom < 5 ? 5 : props.zoom;
+function DropdownItem({ zoom, coords, title }) {
+  const mapZoom = zoom < 5 ? 5 : zoom;
   const handleClick = () => {
-    const { lat, long } = props.coords;
-    MapManager.getMap().flyTo({ lat: lat, lng: long }, zoom);
+    const { lat, long } = coords;
+    MapManager.getMap().flyTo({ lat: lat, lng: long }, mapZoom);
   };
 
   return (
@@ -13,7 +13,7 @@ function DropdownItem(props) {
       <li>
         <a className="dropdown-item" href="#" onClick={handleClick}>
           <div className={styles.dropdownItemContent}>
-            <span className={styles.dropdownItemTitle}>{props.title}</span>
+            <span className={styles.dropdownItemTitle}>{title}</span>
           </div>
         </a>
       </li>

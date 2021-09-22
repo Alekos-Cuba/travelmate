@@ -1,13 +1,13 @@
 import UID from "./../../scripts/IdGenerator";
 
-function AccordionItemObjectDataType(props) {
+function AccordionItemObjectDataType({ data }) {
   const getTelephoneInfo = () => {
     const elems = [];
-    Object.keys(props.data).forEach((key) => {
-      if (!(props.data[key] instanceof Array) && props.data[key] !== null) {
+    Object.keys(data).forEach((key) => {
+      if (!(data[key] instanceof Array) && data[key] !== null) {
         elems.push(
           <div key={UID.next().value}>{`${key.replace("_", " ")}: ${
-            props.data[key]
+            data[key]
           }`}</div>
         );
       }

@@ -4,7 +4,7 @@ import { useMapEvents } from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
 import { setMapCenter } from "../../redux/actions/mapActions";
 
-const OverlayMapCenter = (props) => {
+const OverlayMapCenter = () => {
   const dispatch = useDispatch();
   const mapCenter = useSelector((state) => state.mapCenter);
   const [centerCoords, setCenterCoords] = useState(mapCenter);

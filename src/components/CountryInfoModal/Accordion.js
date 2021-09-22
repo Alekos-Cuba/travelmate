@@ -1,7 +1,7 @@
-function Accordion(props) {
+function Accordion({ id, children }) {
   return (
-    <div className="accordion" id={props.id}>
-      {props.children}
+    <div className="accordion" id={id}>
+      {children}
     </div>
   );
 }

@@ -5,16 +5,16 @@ import AccordionItemObjectDataType from "./AccordionItemObjectDataType";
 import AccordionItemLanguages from "./AccordionItemLanguages";
 import AccordionItemNeighbors from "./AccordionItemNeighbors";
 
-function CountryInfo(props) {
+function CountryInfo({ data, onDetailsClose }) {
   const handleClose = () => {
-    props.onDetailsClose?.();
+    onDetailsClose?.();
   };
 
   return (
     <div className={`card text-white bg-dark mb-3 ${styles.countryInfo}`}>
       <div className="card-body">
         <div className={styles.countryInfoHeader}>
-          <h5 className="card-title">{props.data.names.name}</h5>
+          <h5 className="card-title">{data.names.name}</h5>
           <button
             type="button"
             className="btn-close btn-close-white"
@@ -23,7 +23,7 @@ function CountryInfo(props) {
           ></button>
         </div>
         <h6 className="card-subtitle mb-2 text-muted">
-          {`${props.data.names.full} (Continent: ${props.data.names?.continent})`}
+          {`${data.names.full} (Continent: ${data.names?.continent})`}
         </h6>
         <Accordion id="countryInfoAccordion">
           <AccordionItem
@@ -36,7 +36,7 @@ function CountryInfo(props) {
             title="Neighbor countries"
           >
             <AccordionItemNeighbors
-              data={props.data.neighbors}
+              data={data.neighbors}
             ></AccordionItemNeighbors>
           </AccordionItem>
           <AccordionItem
@@ -49,7 +49,7 @@ function CountryInfo(props) {
             title="Emergency phones"
           >
             <AccordionItemObjectDataType
-              data={props.data.telephone}
+              data={data.telephone}
             ></AccordionItemObjectDataType>
           </AccordionItem>
           <AccordionItem
@@ -62,7 +62,7 @@ function CountryInfo(props) {
             title="Languages"
           >
             <AccordionItemLanguages
-              data={props.data.language}
+              data={data.language}
             ></AccordionItemLanguages>
           </AccordionItem>
           <AccordionItem
@@ -75,13 +75,13 @@ function CountryInfo(props) {
             title="Currency(s)"
           >
             <AccordionItemObjectDataType
-              data={props.data.currency}
+              data={data.currency}
             ></AccordionItemObjectDataType>
           </AccordionItem>
         </Accordion>
         <br />
         <a
-          href={props.data.advise?.CA?.url}
+          href={data.advise?.CA?.url}
           className="card-link"
           target="_blank"
           rel="noreferrer"

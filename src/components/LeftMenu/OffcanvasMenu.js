@@ -1,21 +1,21 @@
-const OffcanvasMenu = (props) => {
+const OffcanvasMenu = ({ id, title, position, children }) => {
   return (
     <div
-      className={`offcanvas offcanvas-${props.position} bg-dark text-white`}
+      className={`offcanvas offcanvas-${position} bg-dark text-white`}
       tabIndex="-1"
-      id={props.id}
-      aria-labelledby={`${props.id}Label`}
+      id={id}
+      aria-labelledby={`${id}Label`}
     >
       <div className="offcanvas-header">
-        <h5 id={`${props.id}Label`}>{props.title}</h5>
+        <h5 id={`${id}Label`}>{title}</h5>
         <button
           type="button"
-          className="btn-close text-reset"
+          className="btn-close text-reset bg-light"
           data-bs-dismiss="offcanvas"
           aria-label="Close"
         ></button>
       </div>
-      <div className="offcanvas-body">{props.children}</div>
+      <div className="offcanvas-body">{children}</div>
     </div>
   );
 };

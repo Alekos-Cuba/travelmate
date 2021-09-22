@@ -1,16 +1,14 @@
-const ReadOnlyInput = ({ id, type, value, label }) => {
+const ReadOnlyInput = ({ input, label }) => {
   return (
     <>
-      <label className="mt-2" htmlFor={id}>
+      <label className="mt-2" htmlFor={input.id}>
         {label}
       </label>
       <input
-        id={id}
+        {...input}
+        aria-label="readonly input"
         className="form-control"
-        type={type}
-        aria-label="readonly input example"
-        value={value}
-        readonly
+        readOnly
         disabled
       ></input>
     </>

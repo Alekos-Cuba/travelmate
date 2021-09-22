@@ -16,7 +16,7 @@ import OverlayMapCenter from "../Overlay/OverlayMapCenter";
 import { useDispatch, useSelector } from "react-redux";
 import { setMapCenter } from "../../redux/actions/mapActions";
 
-function Map(props) {
+function Map({ showMapCenter, onShowMarkerDetails }) {
   const dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
@@ -30,7 +30,7 @@ function Map(props) {
 
   return (
     <MapContainer center={defaultCenter} zoom={defaultZoom} zoomControl={false}>
-      {props.showMapCenter ? (
+      {showMapCenter ? (
         <Overlay>
           <OverlayMapCenter />
         </Overlay>
@@ -47,7 +47,7 @@ function Map(props) {
                 <Popup>
                   <MarkerPopupInfo
                     data={markerData}
-                    onShowDetails={props.onShowMarkerDetails}
+                    onShowDetails={onShowMarkerDetails}
                   ></MarkerPopupInfo>
                 </Popup>
               </Marker>

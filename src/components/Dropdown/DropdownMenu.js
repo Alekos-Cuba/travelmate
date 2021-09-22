@@ -3,7 +3,7 @@ import UID from "../../scripts/IdGenerator";
 import DropdownItem from "./DropdownItem";
 import { useSelector } from "react-redux";
 
-function DropdownMenu(props) {
+function DropdownMenu({ title }) {
   const countries = useSelector((state) => state.countries);
 
   return (
@@ -17,7 +17,7 @@ function DropdownMenu(props) {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          {props.title}
+          {title}
         </a>
         <ul
           className={`dropdown-menu dropdown-menu-dark ${styles.dropdownList}`}

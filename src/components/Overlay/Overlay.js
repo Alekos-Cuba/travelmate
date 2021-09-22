@@ -1,16 +1,16 @@
 import styles from "./../../css/overlay.module.css";
 
-function Overlay(props) {
+function Overlay({ backgroundColor, fullScreen, children }) {
   const style = {
-    backgroundColor: props.backgroundColor,
-    width: props.fullScreen ? "100%" : "200px",
-    height: props.fullScreen ? "100%" : "30px",
-    top: props.fullScreen ? 0 : "calc(50% - 10px)",
-    left: props.fullScreen ? 0 : "calc(50% - 100px)",
+    backgroundColor: backgroundColor,
+    width: fullScreen ? "100%" : "200px",
+    height: fullScreen ? "100%" : "30px",
+    top: fullScreen ? 0 : "calc(50% - 10px)",
+    left: fullScreen ? 0 : "calc(50% - 100px)",
   };
   return (
     <div className={styles.overlay} style={style}>
-      {props.children}
+      {children}
     </div>
   );
 }

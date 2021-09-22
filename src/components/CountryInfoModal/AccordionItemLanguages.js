@@ -1,9 +1,9 @@
 import UID from "./../../scripts/IdGenerator";
 
-function AccordionItemLanguages(props) {
+function AccordionItemLanguages({ data }) {
   return (
     <div className="accordion-body text-black">
-      {props.data.map((elem) => {
+      {data.map((elem) => {
         return (
           <div key={UID.next().value}>{`${elem.language} ${
             elem.official === "Yes" ? `(Official)` : ""
