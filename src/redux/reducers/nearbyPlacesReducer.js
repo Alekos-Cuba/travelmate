@@ -4,6 +4,10 @@ const nearbyPlacesReducer = (state = [], action) => {
       state = [...action.payload];
       return state;
     }
+    case "CLEAR_NEARBY_PLACES": {
+      state = [];
+      return state;
+    }
     default:
       return state;
   }

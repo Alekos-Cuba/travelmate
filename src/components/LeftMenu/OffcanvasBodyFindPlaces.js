@@ -2,7 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import ReadOnlyInput from "./ReadOnlyInput";
 import NearbyPlacesSearchResults from "./NearbyPlacesSearchResults";
-import { setNearbyPlaces } from "./../../redux/actions/placesActions";
+import {
+  setNearbyPlaces,
+  clearNearbyPlaces,
+} from "./../../redux/actions/placesActions";
 import { useState } from "react";
 
 const OffcanvasBodyFindPlaces = () => {
@@ -46,7 +49,7 @@ const OffcanvasBodyFindPlaces = () => {
 
   const clearResults = (e) => {
     e?.preventDefault();
-    dispatch(setNearbyPlaces([]));
+    dispatch(clearNearbyPlaces());
   };
 
   return (

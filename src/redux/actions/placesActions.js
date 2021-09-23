@@ -4,3 +4,9 @@ export const setNearbyPlaces = (places) => {
     payload: places,
   };
 };
+
+export const clearNearbyPlaces = () => {
+  return {
+    type: "CLEAR_NEARBY_PLACES",
+  };
+};
