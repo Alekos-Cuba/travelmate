@@ -102,6 +102,9 @@ class MapManagement {
     this.#iconCategory.set("bakery", "bi-basket");
     this.#iconCategory.set("electronics_store", "bi-headset");
     this.#iconCategory.set("home_goods_store", "bi-music-player");
+    this.#iconCategory.set("night_club", "bi-music-note-list");
+    this.#iconCategory.set("car_rental", "bi-truck");
+    this.#iconCategory.set("storage", "bi-house-door");
   }
 }
 

@@ -23,12 +23,14 @@ const NearbyPlaceCard = ({ data }) => {
     <>
       <div className="card mt-2">
         <div className="card-header d-flex flex-row justify-content-between bg-dark">
-          <i className={`bi ${getIcon()} me-1`}></i>
+          <i className={`bi ${getIcon()} text-primary me-1`}></i>
           <span>
             <b>{data.name}</b>
           </span>
           <a
-            className="bg-dark"
+            className="bg-dark link-warning"
+            data-bs-placement="top"
+            title="Zoom to place"
             style={{ cursor: "pointer" }}
             onClick={travelToPlace}
           >
