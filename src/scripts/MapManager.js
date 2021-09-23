@@ -95,6 +95,13 @@ class MapManagement {
     this.#iconCategory.set("real_estate_agency", "bi-receipt-cutoff");
     this.#iconCategory.set("transit_station", "bi-stoplights");
     this.#iconCategory.set("finance", "bi-cash-coin");
+    this.#iconCategory.set("jewelry_store", "bi-gem");
+    this.#iconCategory.set("cemetery", "bi-file-break-fill");
+    this.#iconCategory.set("pharmacy", "bi-bookmark-heart");
+    this.#iconCategory.set("travel_agency", "bi-signpost-split");
+    this.#iconCategory.set("bakery", "bi-basket");
+    this.#iconCategory.set("electronics_store", "bi-headset");
+    this.#iconCategory.set("home_goods_store", "bi-music-player");
   }
 }
 
