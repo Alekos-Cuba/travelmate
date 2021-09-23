@@ -24,13 +24,15 @@ function Map({ showMapCenter, onShowMarkerDetails }) {
   const defaultCenter = [38.9072, -77.0369];
   const defaultZoom = 6;
 
-  const setMapAccessor = (map) => {
-    MapManager.setMap(map);
-    MapManager.disableMapControls();
-  };
-
   return (
-    <MapContainer center={defaultCenter} zoom={defaultZoom} zoomControl={false}>
+    <MapContainer
+      center={defaultCenter}
+      zoom={defaultZoom}
+      zoomControl={false}
+      whenCreated={(map) => {
+        MapManager.setMap(map);
+      }}
+    >
       {showMapCenter ? (
         <Overlay>
           <OverlayMapCenter />
@@ -78,7 +80,6 @@ function Map({ showMapCenter, onShowMarkerDetails }) {
       {isFirstLoad ? (
         <MapConsumer>
           {(map) => {
-            setMapAccessor(map);
             window.navigator.geolocation.getCurrentPosition(
               (res) => {
                 let latitude = res.coords.latitude,
