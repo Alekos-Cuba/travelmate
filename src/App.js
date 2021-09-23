@@ -14,6 +14,11 @@ import { setCountries } from "./redux/actions/countryActions";
 import { useDispatch } from "react-redux";
 
 function App() {
+  const url = window.location.origin;
+  if (!url.includes("localhost") && !url.includes("https")) {
+    window.location = `https:${url.split(":")[1]}`;
+  }
+
   const dispatch = useDispatch();
   const [showLoadOverlay, setShowLoadOverlay] = useState(true);
   const [showDetails, setShowDetails] = useState(false);
