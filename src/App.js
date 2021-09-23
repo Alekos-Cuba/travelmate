@@ -35,9 +35,6 @@ function App() {
       dispatch(setCountries(JSON.parse(localStorage.getItem("countries"))));
       setShowLoadOverlay(false);
       setShowMapCenter(true);
-      setTimeout(() => {
-        MapManager.enableMapControls();
-      }, 1000);
     } else {
       const countryListPromise = MapManager.getCountries();
       countryListPromise.then(async (res) => {
@@ -68,7 +65,6 @@ function App() {
             setShowLoadOverlay(false);
             setShowMapCenter(true);
             dispatch(setCountries(countriesWithData));
-            MapManager.enableMapControls();
             //save countries info in localStorage
             localStorage.setItem(
               "countries",
