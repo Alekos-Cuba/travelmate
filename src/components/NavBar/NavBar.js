@@ -17,7 +17,7 @@ function NavBar(props) {
               <DropdownMenu title="Fast travel"></DropdownMenu>
             </ul>
             <NavBarActionButton
-              icon="pin-map"
+              icon="binoculars-fill"
               button={{
                 toggle: "offcanvas",
                 target: "offCanvasLeftMenu",
@@ -26,7 +26,9 @@ function NavBar(props) {
               }}
             />
           </div>
-          <button className="btn btn-info">?</button>
+          <button className="btn btn-info">
+            <i className="bi bi-question-circle"></i>
+          </button>
         </div>
       </nav>
     </>
