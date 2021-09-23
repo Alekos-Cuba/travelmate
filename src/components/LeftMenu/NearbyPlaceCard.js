@@ -23,7 +23,7 @@ const NearbyPlaceCard = ({ data }) => {
     <>
       <div className="card mt-2">
         <div className="card-header d-flex flex-row justify-content-between bg-dark">
-          <i className={`bi ${getIcon()} text-primary me-1`}></i>
+          <i className={`bi ${getIcon()} text-info me-1`}></i>
           <span>
             <b>{data.name}</b>
           </span>

@@ -77,6 +77,7 @@ class MapManagement {
     this.#iconCategory.set("building", "bi-building");
     this.#iconCategory.set("park", "bi-tree");
     this.#iconCategory.set("health", "bi-suit-heart");
+    this.#iconCategory.set("doctor", "bi-suit-heart");
     this.#iconCategory.set("gym", "bi-bicycle");
     this.#iconCategory.set("lodging", "bi-house");
     this.#iconCategory.set("school", "bi-vector-pen");
