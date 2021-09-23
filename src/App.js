@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Map from "./components/Map/Map";
 import MapManager from "./scripts/MapManager";
 import Overlay from "./components/Overlay/Overlay";
-import DetailsCard from "./components/Wrappers/DetailsCard";
+import DetailsCard from "./components/Global/DetailsCard";
 import CountryInfo from "./components/CountryInfoModal/CountryInfo";
 import NavBar from "./components/NavBar/NavBar";
 import OffcanvasMenu from "./components/LeftMenu/OffcanvasMenu";
