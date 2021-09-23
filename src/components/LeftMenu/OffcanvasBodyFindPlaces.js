@@ -1,17 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import ReadOnlyInput from "./ReadOnlyInput";
+import ReadOnlyInput from "../Global/ReadOnlyInput";
 import NearbyPlacesSearchResults from "./NearbyPlacesSearchResults";
 import {
   setNearbyPlaces,
   clearNearbyPlaces,
 } from "./../../redux/actions/placesActions";
 import { useState } from "react";
+import RangeInput from "../Global/RangeInput";
 
 const OffcanvasBodyFindPlaces = () => {
   const dispatch = useDispatch();
   const mapCenter = useSelector((state) => state.mapCenter);
+  const [searchRadius, setSearchRadius] = useState();
   const [searching, setSearching] = useState(false);
+
+  const searchRadiusChanged = (radius) => {
+    setSearchRadius(radius);
+  };
 
   const handleFindButtonClick = (e) => {
     e.preventDefault();
@@ -22,7 +28,7 @@ const OffcanvasBodyFindPlaces = () => {
       params: {
         location: `${mapCenter.lat},${mapCenter.lng}`,
         language: "en",
-        radius: "150",
+        radius: searchRadius,
       },
       headers: {
         "x-rapidapi-host": "trueway-places.p.rapidapi.com",
@@ -55,8 +61,9 @@ const OffcanvasBodyFindPlaces = () => {
   return (
     <>
       <div className="container">
-        <form>
+        <form className="d-flex flex-column">
           <ReadOnlyInput
+            ariaLabel="Latitude input"
             input={{
               id: "latInput",
               type: "text",
@@ -65,8 +72,20 @@ const OffcanvasBodyFindPlaces = () => {
             label="Latitude"
           />
           <ReadOnlyInput
-            input={{ id: "latInput", type: "text", value: mapCenter.lng }}
+            ariaLabel="Longitude input"
+            input={{ id: "lngInput", type: "text", value: mapCenter.lng }}
             label="Longitude"
+          />
+          <RangeInput
+            label="Distance (m)"
+            input={{
+              id: "distanceRangeInput",
+              min: 50,
+              max: 300,
+              step: 10,
+              defaultValue: 150,
+            }}
+            onRangeChange={searchRadiusChanged}
           />
           <div className="mt-2 d-flex flex-row justify-content-evenly">
             <button
