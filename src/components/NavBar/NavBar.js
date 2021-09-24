@@ -2,7 +2,7 @@ import styles from "./../../css/navbar.module.css";
 import DropdownMenu from "../Dropdown/DropdownMenu";
 import NavBarActionButton from "./NavBarActionButton";
 
-function NavBar(props) {
+function NavBar() {
   return (
     <>
       <nav
