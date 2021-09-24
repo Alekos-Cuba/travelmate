@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import ReadOnlyInput from "../Global/ReadOnlyInput";
 import NearbyPlacesSearchResults from "./NearbyPlacesSearchResults";
 import {
@@ -8,6 +7,7 @@ import {
 } from "./../../redux/actions/placesActions";
 import { useState } from "react";
 import RangeInput from "../Global/RangeInput";
+import DataProvider from "../../scripts/DataProvider";
 
 const OffcanvasBodyFindPlaces = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const OffcanvasBodyFindPlaces = () => {
     setSearchRadius(radius);
   };
 
-  const handleFindButtonClick = (e) => {
+  const handleFindButtonClick = async (e) => {
     e.preventDefault();
     setSearching(true);
     var options = {
@@ -36,21 +36,13 @@ const OffcanvasBodyFindPlaces = () => {
       },
     };
 
-    axios
-      .request(options)
-      .then(function (response) {
-        if (response.data.results?.length > 0) {
-          console.log(response.data);
-          dispatch(setNearbyPlaces(response.data.results));
-        } else {
-          clearResults();
-        }
-        setSearching(false);
-      })
-      .catch(function (error) {
-        console.error(error);
-        setSearching(false);
-      });
+    const data = await DataProvider.getData(options);
+    if (data.results?.length > 0) {
+      dispatch(setNearbyPlaces(data.results));
+    } else {
+      clearResults();
+    }
+    setSearching(false);
   };
 
   const clearResults = (e) => {

@@ -12,6 +12,7 @@ import OffcanvasBodyFindPlaces from "./components/LeftMenu/OffcanvasBodyFindPlac
 import OverlayLoading from "./components/Overlay/OverlayLoading";
 import { setCountries } from "./redux/actions/countryActions";
 import { useDispatch } from "react-redux";
+import DataProvider from "./scripts/DataProvider";
 
 function App() {
   const url = window.location.origin;
@@ -35,51 +36,51 @@ function App() {
   };
 
   useEffect(() => {
+    const fetchCountriesData = async () => {
+      const countryReqOptions = {
+        url: "https://travelbriefing.org/countries.json",
+      };
+      const countryList = await DataProvider.getData(countryReqOptions);
+      if (!countryList.errorMessage) {
+        const countryPromises = [];
+        countryList.forEach((countryData) => {
+          const countryInfoReqOptions = {
+            url: countryData.url,
+          };
+          countryPromises.push(DataProvider.getData(countryInfoReqOptions));
+        });
+        try {
+          const countriesInfoFromURL = await Promise.allSettled(
+            countryPromises
+          );
+          let countriesWithData = countriesInfoFromURL.map((countryInfo) => {
+            let flagUrl = countryInfo.value.names.iso2
+              ? `https://www.countryflags.io/${countryInfo.value.names.iso2}/shiny/32.png`
+              : defaultFlag;
+            return {
+              ...countryInfo.value,
+              flag: flagUrl,
+            };
+          });
+          console.log(countriesWithData);
+          setShowLoadOverlay(false);
+          setShowMapCenter(true);
+          dispatch(setCountries(countriesWithData));
+          //save countries info in localStorage
+          localStorage.setItem("countries", JSON.stringify(countriesWithData));
+        } catch (err) {
+          console.log(err.errorMessage);
+        }
+      }
+    };
+
     //search for countries info in localStorage first
     if (localStorage.getItem("countries") !== null) {
       dispatch(setCountries(JSON.parse(localStorage.getItem("countries"))));
       setShowLoadOverlay(false);
       setShowMapCenter(true);
     } else {
-      const countryListPromise = MapManager.getCountries();
-      countryListPromise.then(async (res) => {
-        if (!res.errorMessage) {
-          const countryPromises = [];
-          const data = res.data;
-          data.forEach((countryData) => {
-            countryPromises.push(MapManager.getCountryInfo(countryData.url));
-          });
-          try {
-            const countriesInfoFromURL = await Promise.all(countryPromises);
-            let countriesWithData = countriesInfoFromURL
-              .filter((countryInfo) => {
-                return (
-                  !("errorMessage" in countryInfo) || countryInfo === undefined
-                );
-              })
-              .map((countryInfo) => {
-                let flagUrl = countryInfo.data.names.iso2
-                  ? `https://www.countryflags.io/${countryInfo.data.names.iso2}/shiny/32.png`
-                  : defaultFlag;
-                return {
-                  ...countryInfo.data,
-                  flag: flagUrl,
-                };
-              });
-            //console.log(countriesWithData);
-            setShowLoadOverlay(false);
-            setShowMapCenter(true);
-            dispatch(setCountries(countriesWithData));
-            //save countries info in localStorage
-            localStorage.setItem(
-              "countries",
-              JSON.stringify(countriesWithData)
-            );
-          } catch (err) {
-            console.log(err);
-          }
-        }
-      });
+      fetchCountriesData();
     }
   }, [dispatch]);
 
