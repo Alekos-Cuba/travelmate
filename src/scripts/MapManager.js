@@ -1,5 +1,3 @@
-import axios from "axios";
-
 class MapManagement {
   #map;
   #iconCategory;
@@ -39,26 +37,6 @@ class MapManagement {
     this.#map.keyboard.enable();
     if (this.#map.tap) {
       this.#map.tap.enable();
-    }
-  }
-
-  async getCountries() {
-    try {
-      const countries = await axios.get(
-        "https://travelbriefing.org/countries.json"
-      );
-      return countries;
-    } catch (err) {
-      return { errorMessage: err.message };
-    }
-  }
-
-  async getCountryInfo(url) {
-    try {
-      const countryInfo = await axios.get(url);
-      return countryInfo;
-    } catch (err) {
-      return { errorMessage: err.message };
     }
   }
 
