@@ -32,7 +32,7 @@ const OffcanvasBodyFindPlaces = () => {
       },
       headers: {
         "x-rapidapi-host": "trueway-places.p.rapidapi.com",
-        "x-rapidapi-key": "8217908345msh55f2b71a7356f61p1e3d98jsn578f274acdf7",
+        "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
       },
     };
 

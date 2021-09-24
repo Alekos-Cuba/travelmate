@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function ActionButton({ action, icon, color, label }) {
+function ActionButton({ action, icon, color, label, tooltip, position }) {
   const [isBusy, setIsBusy] = useState(false);
 
   const hasLabel = () => {
@@ -21,6 +21,8 @@ function ActionButton({ action, icon, color, label }) {
       type="button"
       className={`ms-2 btn btn-${color ?? "primary"}`}
       data-bs-toggle="button"
+      data-bs-placement={position}
+      title={tooltip}
       disabled={isBusy}
       onClick={handleClick}
     >

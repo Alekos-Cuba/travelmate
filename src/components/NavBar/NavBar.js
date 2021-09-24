@@ -18,7 +18,7 @@ function NavBar() {
       },
       headers: {
         "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
-        "x-rapidapi-key": "8217908345msh55f2b71a7356f61p1e3d98jsn578f274acdf7",
+        "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
       },
     };
 
@@ -55,6 +55,8 @@ function NavBar() {
               icon={IconProvider.getIconByName("weather")}
               color="primary"
               action={showWeather}
+              tooltip="Show weather conditions"
+              position="bottom"
             />
           </div>
           <button className="btn btn-info">
