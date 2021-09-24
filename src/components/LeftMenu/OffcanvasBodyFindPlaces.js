@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import ReadOnlyInput from "../Global/ReadOnlyInput";
 import NearbyPlacesSearchResults from "./NearbyPlacesSearchResults";
+import IconProvider from "../../scripts/IconProvider";
 import {
   setNearbyPlaces,
   clearNearbyPlaces,
@@ -8,23 +9,22 @@ import {
 import { useState } from "react";
 import RangeInput from "../Global/RangeInput";
 import DataProvider from "../../scripts/DataProvider";
+import APIProvider from "../../scripts/APIProvider";
+import ActionButton from "../Global/ActionButton";
 
 const OffcanvasBodyFindPlaces = () => {
   const dispatch = useDispatch();
   const mapCenter = useSelector((state) => state.mapCenter);
   const [searchRadius, setSearchRadius] = useState();
-  const [searching, setSearching] = useState(false);
 
   const searchRadiusChanged = (radius) => {
     setSearchRadius(radius);
   };
 
-  const handleFindButtonClick = async (e) => {
-    e.preventDefault();
-    setSearching(true);
+  const handleFindButtonClick = async (callback) => {
     var options = {
       method: "GET",
-      url: "https://trueway-places.p.rapidapi.com/FindPlacesNearby",
+      url: APIProvider.getAPIbyName("nearbyPlaces"),
       params: {
         location: `${mapCenter.lat},${mapCenter.lng}`,
         language: "en",
@@ -42,7 +42,7 @@ const OffcanvasBodyFindPlaces = () => {
     } else {
       clearResults();
     }
-    setSearching(false);
+    callback?.();
   };
 
   const clearResults = (e) => {
@@ -80,25 +80,12 @@ const OffcanvasBodyFindPlaces = () => {
             onRangeChange={searchRadiusChanged}
           />
           <div className="mt-2 d-flex flex-row justify-content-evenly">
-            <button
-              className="btn btn-success"
-              type="submit"
-              onClick={handleFindButtonClick}
-              disabled={searching}
-            >
-              {searching ? (
-                <div>
-                  <span
-                    className="spinner-border spinner-border-sm"
-                    role="status"
-                    aria-hidden="true"
-                  ></span>
-                  Searching...
-                </div>
-              ) : (
-                "Search"
-              )}
-            </button>
+            <ActionButton
+              icon={IconProvider.getIconByName("search")}
+              color="success"
+              action={handleFindButtonClick}
+              label="Search"
+            />
             <button className="btn btn-danger" onClick={clearResults}>
               Clear
             </button>

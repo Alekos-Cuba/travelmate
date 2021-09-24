@@ -1,3 +1,4 @@
+import IconProvider from "../../scripts/IconProvider";
 import MapManager from "./../../scripts/MapManager";
 
 const NearbyPlaceCard = ({ data }) => {
@@ -9,7 +10,7 @@ const NearbyPlaceCard = ({ data }) => {
   };
 
   const getIcon = () => {
-    let icons = MapManager.getIconCategories();
+    let icons = IconProvider.getAll();
     let placeIcon = "";
     for (let i = 0; i < data.types.length; i++) {
       if (icons.has(data.types[i])) {

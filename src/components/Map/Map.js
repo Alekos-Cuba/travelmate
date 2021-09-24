@@ -15,6 +15,7 @@ import Overlay from "../Overlay/Overlay";
 import OverlayMapCenter from "../Overlay/OverlayMapCenter";
 import { useDispatch, useSelector } from "react-redux";
 import { setMapCenter } from "../../redux/actions/mapActions";
+import APIProvider from "../../scripts/APIProvider";
 
 function Map({ showMapCenter, onShowMarkerDetails }) {
   const dispatch = useDispatch();
@@ -73,7 +74,7 @@ function Map({ showMapCenter, onShowMarkerDetails }) {
         })}
       </LayerGroup>
       <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url={APIProvider.getAPIbyName("mapTiles")}
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       <ZoomControl position="bottomright" />

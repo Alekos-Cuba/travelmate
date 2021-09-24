@@ -13,6 +13,7 @@ import OverlayLoading from "./components/Overlay/OverlayLoading";
 import { setCountries } from "./redux/actions/countryActions";
 import { useDispatch } from "react-redux";
 import DataProvider from "./scripts/DataProvider";
+import APIProvider from "./scripts/APIProvider";
 
 function App() {
   const url = window.location.origin;
@@ -38,7 +39,7 @@ function App() {
   useEffect(() => {
     const fetchCountriesData = async () => {
       const countryReqOptions = {
-        url: "https://travelbriefing.org/countries.json",
+        url: APIProvider.getAPIbyName("countryList"),
       };
       const countryList = await DataProvider.getData(countryReqOptions);
       if (!countryList.errorMessage) {

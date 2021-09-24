@@ -1,7 +1,7 @@
 const NavBarActionButton = ({ icon, button }) => {
   return (
     <button
-      className="btn btn-primary"
+      className="ms-2 btn btn-primary"
       type="button"
       data-bs-toggle={button.toggle}
       data-bs-target={`#${button.target}`}
@@ -9,7 +9,7 @@ const NavBarActionButton = ({ icon, button }) => {
       data-bs-placement="bottom"
       title={button.tooltip}
     >
-      <i className={`bi bi-${icon}`}></i>
+      <i className={`bi ${icon}`}></i>
     </button>
   );
 };
