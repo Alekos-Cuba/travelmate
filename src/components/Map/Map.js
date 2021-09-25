@@ -36,13 +36,18 @@ function Map({ showMapCenter, onShowMarkerDetails }) {
         MapManager.setMap(map);
       }}
     >
-      {showMapCenter && <MapCenterIndicator />}
-      {ReactDOM.createPortal(
-        <Modal bottom="0" left="0" centerDiv={false}>
-          <MapCenterCoordinates />
-        </Modal>,
-        document.getElementById("modals-root")
-      )}
+      {showMapCenter &&
+        ReactDOM.createPortal(
+          <MapCenterIndicator />,
+          document.getElementById("overlay-root")
+        )}
+      {showMapCenter &&
+        ReactDOM.createPortal(
+          <Modal bottom="0" left="0" centerDiv={false}>
+            <MapCenterCoordinates />
+          </Modal>,
+          document.getElementById("modals-root")
+        )}
       <LayerGroup>
         {countries.map((markerData) => {
           if (markerData) {
