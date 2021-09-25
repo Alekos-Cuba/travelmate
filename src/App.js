@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import defaultFlag from "./resources/images/noflag.png";
 import { useEffect, useState } from "react";
 import Map from "./components/Map/Map";
-import Modal from "./components/Modals/Modal";
+import Modal from "./components/Global/Modal";
 import CountryInfo from "./components/CountryInfoModal/CountryInfo";
 import NavBar from "./components/NavBar/NavBar";
 import OffcanvasMenu from "./components/LeftMenu/OffcanvasMenu";

@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMapCenter } from "../../redux/actions/mapActions";
 import APIProvider from "../../scripts/APIProvider";
 import MapCenterIndicator from "./MapCenterIndicator";
-import Modal from "../Modals/Modal";
+import Modal from "../Global/Modal";
 
 function Map({ showMapCenter, onShowMarkerDetails }) {
   const dispatch = useDispatch();
