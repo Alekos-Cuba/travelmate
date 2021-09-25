@@ -14,3 +14,7 @@
 .z-index-600 {
   z-index: 600;
 }
+
+.modal-fitcontent {
+  width: max-content;
+}
