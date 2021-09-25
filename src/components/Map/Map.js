@@ -17,6 +17,7 @@ import { setMapCenter } from "../../redux/actions/mapActions";
 import APIProvider from "../../scripts/APIProvider";
 import MapCenterIndicator from "./MapCenterIndicator";
 import Modal from "../Global/Modal";
+import MapCenterCoordinates from "./MapCenterCoordinates";
 
 function Map({ showMapCenter, onShowMarkerDetails }) {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ function Map({ showMapCenter, onShowMarkerDetails }) {
       {showMapCenter && <MapCenterIndicator />}
       {ReactDOM.createPortal(
         <Modal bottom="0" left="0" centerDiv={false}>
-          asdsd
+          <MapCenterCoordinates />
         </Modal>,
         document.getElementById("modals-root")
       )}
