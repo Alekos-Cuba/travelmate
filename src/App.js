@@ -1,8 +1,8 @@
 import "./App.css";
+import ReactDOM from "react-dom";
 import defaultFlag from "./resources/images/noflag.png";
 import { useEffect, useState } from "react";
 import Map from "./components/Map/Map";
-import MapManager from "./scripts/MapManager";
 import Overlay from "./components/Overlay/Overlay";
 import DetailsCard from "./components/Global/DetailsCard";
 import CountryInfo from "./components/CountryInfoModal/CountryInfo";
@@ -87,14 +87,20 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar></NavBar>
-      <OffcanvasMenu
-        position="start"
-        id="offCanvasLeftMenu"
-        title="Find nearby places"
-      >
-        <OffcanvasBodyFindPlaces></OffcanvasBodyFindPlaces>
-      </OffcanvasMenu>
+      {ReactDOM.createPortal(
+        <NavBar></NavBar>,
+        document.getElementById("navbar-root")
+      )}
+      {ReactDOM.createPortal(
+        <OffcanvasMenu
+          position="start"
+          id="offCanvasLeftMenu"
+          title="Find nearby places"
+        >
+          <OffcanvasBodyFindPlaces></OffcanvasBodyFindPlaces>
+        </OffcanvasMenu>,
+        document.getElementById("left-menu-root")
+      )}
       {showLoadOverlay ? (
         <Overlay backgroundColor="rgba(0, 0, 0, 0.7)" fullScreen={true}>
           <OverlayLoading></OverlayLoading>
