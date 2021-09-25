@@ -1,4 +1,3 @@
-import styles from "./../../css/dropdownMenu.module.css";
 import UID from "../../scripts/IdGenerator";
 import DropdownItem from "./DropdownItem";
 import { useSelector } from "react-redux";
@@ -8,7 +7,7 @@ function DropdownMenu({ title }) {
 
   return (
     <>
-      <li className={`nav-item dropdown ${styles.dropdownTitle}`}>
+      <li className="nav-item dropdown fs-5">
         <a
           className="nav-link dropdown-toggle"
           href="/"
@@ -20,7 +19,8 @@ function DropdownMenu({ title }) {
           {title}
         </a>
         <ul
-          className={`dropdown-menu dropdown-menu-dark overflow-auto ${styles.dropdownList}`}
+          className="dropdown-menu dropdown-menu-dark overflow-auto"
+          style={{ height: "25rem" }}
           aria-labelledby="navbarDarkDropdownMenuLink"
         >
           {countries.map((item) => {

@@ -7,15 +7,16 @@ import {
   LayerGroup,
   Popup,
 } from "react-leaflet";
+import ReactDOM from "react-dom";
 import MapManager from "../../scripts/MapManager";
 import { useState } from "react";
 import MarkerPopupInfo from "../MarkerPopupInfo";
 import UID from "../../scripts/IdGenerator";
-import Overlay from "../Overlay/Overlay";
-import OverlayMapCenter from "../Overlay/OverlayMapCenter";
 import { useDispatch, useSelector } from "react-redux";
 import { setMapCenter } from "../../redux/actions/mapActions";
 import APIProvider from "../../scripts/APIProvider";
+import MapCenterIndicator from "./MapCenterIndicator";
+import Modal from "../Modals/Modal";
 
 function Map({ showMapCenter, onShowMarkerDetails }) {
   const dispatch = useDispatch();
@@ -34,11 +35,13 @@ function Map({ showMapCenter, onShowMarkerDetails }) {
         MapManager.setMap(map);
       }}
     >
-      {showMapCenter ? (
-        <Overlay>
-          <OverlayMapCenter />
-        </Overlay>
-      ) : null}
+      {showMapCenter && <MapCenterIndicator />}
+      {ReactDOM.createPortal(
+        <Modal bottom="0" left="0" centerDiv={false}>
+          asdsd
+        </Modal>,
+        document.getElementById("modals-root")
+      )}
       <LayerGroup>
         {countries.map((markerData) => {
           if (markerData) {

@@ -1,4 +1,3 @@
-import styles from "./../../css/dropdownItem.module.css";
 import MapManager from "../../scripts/MapManager";
 
 function DropdownItem({ zoom, coords, title, flag }) {
@@ -14,7 +13,7 @@ function DropdownItem({ zoom, coords, title, flag }) {
         <a className="dropdown-item" href="#" onClick={handleClick}>
           <div className="d-flex flex-row justify-content-start">
             <img src={flag} alt="flag"></img>
-            <span className={styles.dropdownItemTitle}>{title}</span>
+            <span className="ms-10">{title}</span>
           </div>
         </a>
       </li>

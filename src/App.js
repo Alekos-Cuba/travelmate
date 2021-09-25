@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import defaultFlag from "./resources/images/noflag.png";
 import { useEffect, useState } from "react";
 import Map from "./components/Map/Map";
-import Overlay from "./components/Overlay/Overlay";
 import DetailsCard from "./components/Global/DetailsCard";
 import CountryInfo from "./components/CountryInfoModal/CountryInfo";
 import NavBar from "./components/NavBar/NavBar";
@@ -14,6 +13,7 @@ import { setCountries } from "./redux/actions/countryActions";
 import { useDispatch } from "react-redux";
 import DataProvider from "./scripts/DataProvider";
 import APIProvider from "./scripts/APIProvider";
+import Backdrop from "./components/Overlay/Backdrop";
 
 function App() {
   const url = window.location.origin;
@@ -101,19 +101,26 @@ function App() {
         </OffcanvasMenu>,
         document.getElementById("left-menu-root")
       )}
-      {showLoadOverlay ? (
-        <Overlay backgroundColor="rgba(0, 0, 0, 0.7)" fullScreen={true}>
-          <OverlayLoading></OverlayLoading>
-        </Overlay>
-      ) : null}
-      {showDetails ? (
-        <DetailsCard>
-          <CountryInfo
-            data={markerDetails}
-            onDetailsClose={handleDetailsClose}
-          />
-        </DetailsCard>
-      ) : null}
+      {showLoadOverlay &&
+        ReactDOM.createPortal(
+          <Backdrop />,
+          document.getElementById("backdrop-root")
+        )}
+      {showLoadOverlay &&
+        ReactDOM.createPortal(
+          <OverlayLoading />,
+          document.getElementById("overlay-root")
+        )}
+      {showDetails &&
+        ReactDOM.createPortal(
+          <DetailsCard>
+            <CountryInfo
+              data={markerDetails}
+              onDetailsClose={handleDetailsClose}
+            />
+          </DetailsCard>,
+          document.getElementById("modals-root")
+        )}
       <Map
         onShowMarkerDetails={showMarkerDetails}
         showMapCenter={showMapCenter}

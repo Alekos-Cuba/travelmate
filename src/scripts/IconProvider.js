@@ -44,6 +44,7 @@ class IconProviderClass {
     this.#icons.set("binoculars", "bi-binoculars-fill");
     this.#icons.set("weather", "bi-thermometer-sun");
     this.#icons.set("search", "bi-search");
+    this.#icons.set("plus", "bi-plus-lg");
   }
 
   getAll() {

@@ -1,4 +1,3 @@
-import styles from "./../../css/nearbyPlacesSearchResult.module.css";
 import UID from "../../scripts/IdGenerator";
 import { useSelector } from "react-redux";
 import NearbyPlaceCard from "./NearbyPlaceCard";
@@ -19,7 +18,7 @@ const NearbyPlacesSearchResults = () => {
 
   return (
     <>
-      <div className={`container mt-4 overflow-auto ${styles.placesContainer}`}>
+      <div className="container mt-4 overflow-auto h-50">
         <div className="container-body">{renderNearbyPlaces()}</div>
       </div>
     </>

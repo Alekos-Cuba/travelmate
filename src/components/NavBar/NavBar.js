@@ -1,4 +1,3 @@
-import styles from "./../../css/navbar.module.css";
 import DropdownMenu from "../Dropdown/DropdownMenu";
 import NavBarActionButton from "./NavBarActionButton";
 import ActionButton from "../Global/ActionButton";
@@ -32,7 +31,7 @@ function NavBar() {
   return (
     <>
       <nav
-        className={`navbar navbar-expand-lg navbar-dark bg-dark position-fixed top-0 w-100 ${styles.fixedNavbar}`}
+        className={`navbar navbar-expand-lg navbar-dark bg-dark position-fixed top-0 w-100 z-index-500`}
       >
         <div className="container-fluid">
           <a className="navbar-brand" href="#">

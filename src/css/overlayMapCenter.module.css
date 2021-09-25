@@ -1,9 +1,3 @@
-.mapCenter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .mapCenterText {
   color: firebrick;
   font-weight: bold;
