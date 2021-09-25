@@ -10,7 +10,7 @@ const OffcanvasMenu = ({ id, title, position, children }) => {
         <h5 id={`${id}Label`}>{title}</h5>
         <button
           type="button"
-          className="btn-close text-reset bg-light"
+          className="btn-close text-reset btn-close-white"
           data-bs-dismiss="offcanvas"
           aria-label="Close"
         ></button>
