@@ -87,7 +87,7 @@ function Map({ showMapCenter, onShowMarkerDetails }) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       <ZoomControl position="bottomright" />
-      {isFirstLoad ? (
+      {isFirstLoad && (
         <MapConsumer>
           {(map) => {
             window.navigator.geolocation.getCurrentPosition(
@@ -113,7 +113,7 @@ function Map({ showMapCenter, onShowMarkerDetails }) {
             return null;
           }}
         </MapConsumer>
-      ) : null}
+      )}
     </MapContainer>
   );
 }
