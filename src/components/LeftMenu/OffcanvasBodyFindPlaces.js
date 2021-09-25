@@ -45,9 +45,9 @@ const OffcanvasBodyFindPlaces = () => {
     callback?.();
   };
 
-  const clearResults = (e) => {
-    e?.preventDefault();
+  const clearResults = (callback) => {
     dispatch(clearNearbyPlaces());
+    callback?.();
   };
 
   return (
@@ -86,9 +86,12 @@ const OffcanvasBodyFindPlaces = () => {
               action={handleFindButtonClick}
               label="Search"
             />
-            <button className="btn btn-danger" onClick={clearResults}>
-              Clear
-            </button>
+            <ActionButton
+              icon={IconProvider.getIconByName("clear")}
+              color="danger"
+              action={clearResults}
+              label="Clear"
+            />
           </div>
         </form>
       </div>
