@@ -5,9 +5,15 @@ import IconProvider from "../../scripts/IconProvider";
 import APIProvider from "./../../scripts/APIProvider";
 import { useSelector } from "react-redux";
 import DataProvider from "../../scripts/DataProvider";
+import Modal from "./../Global/Modal";
+import WeatherInfo from "../WeatherInfo/WeatherInfo";
+import { useState } from "react";
+import ReactDOM from "react-dom";
 
 function NavBar() {
   const { lat, lng } = useSelector((state) => state.mapCenter);
+  const [weatherInfo, setWeatherInfo] = useState({});
+  const [showWeatherModal, setShowWeatherModal] = useState(false);
 
   const showWeather = async (callback) => {
     const options = {
@@ -24,8 +30,14 @@ function NavBar() {
     const response = await DataProvider.getData(options);
     if (!response.errorMessage) {
       console.log(response);
+      setWeatherInfo(response);
+      setShowWeatherModal(true);
     }
     callback?.();
+  };
+
+  const weatherModalCloseHandler = () => {
+    setShowWeatherModal(false);
   };
 
   return (
@@ -63,6 +75,16 @@ function NavBar() {
           </button>
         </div>
       </nav>
+      {showWeatherModal &&
+        ReactDOM.createPortal(
+          <Modal top="50" left="50" centerDiv={true}>
+            <WeatherInfo
+              data={weatherInfo}
+              onModalClose={weatherModalCloseHandler}
+            />
+          </Modal>,
+          document.getElementById("modals-root")
+        )}
     </>
   );
 }
