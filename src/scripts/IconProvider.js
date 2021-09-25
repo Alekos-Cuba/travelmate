@@ -45,6 +45,7 @@ class IconProviderClass {
     this.#icons.set("weather", "bi-thermometer-sun");
     this.#icons.set("search", "bi-search");
     this.#icons.set("plus", "bi-plus-lg");
+    this.#icons.set("clear", "bi-x-circle");
   }
 
   getAll() {
