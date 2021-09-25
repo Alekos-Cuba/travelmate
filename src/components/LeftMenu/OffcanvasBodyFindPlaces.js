@@ -15,7 +15,7 @@ import ActionButton from "../Global/ActionButton";
 const OffcanvasBodyFindPlaces = () => {
   const dispatch = useDispatch();
   const mapCenter = useSelector((state) => state.mapCenter);
-  const [searchRadius, setSearchRadius] = useState();
+  const [searchRadius, setSearchRadius] = useState(150);
 
   const searchRadiusChanged = (radius) => {
     setSearchRadius(radius);
