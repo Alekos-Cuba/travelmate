@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import defaultFlag from "./resources/images/noflag.png";
 import { useEffect, useState } from "react";
 import Map from "./components/Map/Map";
-import DetailsCard from "./components/Global/DetailsCard";
+import Modal from "./components/Modals/Modal";
 import CountryInfo from "./components/CountryInfoModal/CountryInfo";
 import NavBar from "./components/NavBar/NavBar";
 import OffcanvasMenu from "./components/LeftMenu/OffcanvasMenu";
@@ -113,12 +113,12 @@ function App() {
         )}
       {showDetails &&
         ReactDOM.createPortal(
-          <DetailsCard>
+          <Modal top="50" left="50" centerDiv={true}>
             <CountryInfo
               data={markerDetails}
               onDetailsClose={handleDetailsClose}
             />
-          </DetailsCard>,
+          </Modal>,
           document.getElementById("modals-root")
         )}
       <Map
