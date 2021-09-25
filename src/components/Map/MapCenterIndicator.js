@@ -15,8 +15,9 @@ const MapCenterIndicator = () => {
 
   return (
     <div
-      className={`bi ${IconProvider.getIconByName("plus")} z-index-550
-      } position-absolute top-50 start-50 translate-middle`}
+      className={`bi ${IconProvider.getIconByName(
+        "plus"
+      )} z-index-550 text-danger position-absolute top-50 start-50 translate-middle`}
     ></div>
   );
 };
