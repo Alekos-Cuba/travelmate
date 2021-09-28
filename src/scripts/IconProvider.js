@@ -50,6 +50,8 @@ class IconProviderClass {
     this.#icons.set("clock", "bi-clock");
     this.#icons.set("moisture", "bi-moisture");
     this.#icons.set("wind", "bi-wind");
+    this.#icons.set("error", "bi-emoji-dizzy");
+    this.#icons.set("success", "bi-emoji-laughing");
   }
 
   getAll() {
