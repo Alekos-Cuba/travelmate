@@ -11,14 +11,22 @@ import RangeInput from "../Global/RangeInput";
 import DataProvider from "../../scripts/DataProvider";
 import APIProvider from "../../scripts/APIProvider";
 import ActionButton from "../Global/ActionButton";
+import ReactDOM from "react-dom";
+import Alert from "../Global/Alert";
 
 const OffcanvasBodyFindPlaces = () => {
   const dispatch = useDispatch();
   const mapCenter = useSelector((state) => state.mapCenter);
   const [searchRadius, setSearchRadius] = useState(150);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   const searchRadiusChanged = (radius) => {
     setSearchRadius(radius);
+  };
+
+  const handleAlertDismiss = () => {
+    setShowAlert(false);
   };
 
   const handleFindButtonClick = async (callback) => {
@@ -37,7 +45,10 @@ const OffcanvasBodyFindPlaces = () => {
     };
 
     const data = await DataProvider.getData(options);
-    if (data.results?.length > 0) {
+    if (data.errorMessage) {
+      setAlertMessage(data.errorMessage);
+      setShowAlert(true);
+    } else if (data.results?.length > 0) {
       dispatch(setNearbyPlaces(data.results));
     } else {
       clearResults();
@@ -52,6 +63,16 @@ const OffcanvasBodyFindPlaces = () => {
 
   return (
     <>
+      {showAlert &&
+        ReactDOM.createPortal(
+          <Alert
+            type="danger"
+            title="Oops!"
+            body={alertMessage}
+            onDismiss={handleAlertDismiss}
+          />,
+          document.getElementById("alerts-root")
+        )}
       <div className="container">
         <form className="d-flex flex-column">
           <ReadOnlyInput

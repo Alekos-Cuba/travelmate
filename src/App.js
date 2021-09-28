@@ -14,18 +14,16 @@ import { useDispatch } from "react-redux";
 import DataProvider from "./scripts/DataProvider";
 import APIProvider from "./scripts/APIProvider";
 import Backdrop from "./components/Overlay/Backdrop";
+import Alert from "./components/Global/Alert";
 
 function App() {
-  const url = window.location.origin;
-  if (!url.includes("localhost") && !url.includes("https")) {
-    window.location = `https:${url.split(":")[1]}`;
-  }
-
   const dispatch = useDispatch();
   const [showLoadOverlay, setShowLoadOverlay] = useState(true);
   const [showDetails, setShowDetails] = useState(false);
   const [showMapCenter, setShowMapCenter] = useState(false);
   const [markerDetails, setMarkerDetails] = useState({});
+  const [alertMessage, setAlertMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   const showMarkerDetails = (markerData) => {
     setMarkerDetails(markerData);
@@ -36,13 +34,22 @@ function App() {
     setShowDetails(false);
   };
 
+  const handleAlertDismiss = () => {
+    setShowAlert(false);
+  };
+
   useEffect(() => {
     const fetchCountriesData = async () => {
       const countryReqOptions = {
         url: APIProvider.getAPIbyName("countryList"),
       };
-      const countryList = await DataProvider.getData(countryReqOptions);
+      const countryList = localStorage.getItem("countryList")
+        ? JSON.parse(localStorage.getItem("countryList"))
+        : await DataProvider.getData(countryReqOptions);
       if (!countryList.errorMessage) {
+        //save country list into browser cache
+        localStorage.setItem("countryList", JSON.stringify(countryList));
+
         const countryPromises = [];
         countryList.forEach((countryData) => {
           const countryInfoReqOptions = {
@@ -63,15 +70,20 @@ function App() {
               flag: flagUrl,
             };
           });
-          console.log(countriesWithData);
           setShowLoadOverlay(false);
           setShowMapCenter(true);
           dispatch(setCountries(countriesWithData));
           //save countries info in localStorage
           localStorage.setItem("countries", JSON.stringify(countriesWithData));
         } catch (err) {
-          console.log(err.errorMessage);
+          setAlertMessage("There was an error fetching the countries' info");
+          setShowAlert(true);
+          setShowLoadOverlay(false);
         }
+      } else {
+        setAlertMessage("Error fetching the list of countries");
+        setShowAlert(true);
+        setShowLoadOverlay(false);
       }
     };
 
@@ -87,6 +99,16 @@ function App() {
 
   return (
     <div className="App">
+      {showAlert &&
+        ReactDOM.createPortal(
+          <Alert
+            type="danger"
+            title="Oops!"
+            body={alertMessage}
+            onDismiss={handleAlertDismiss}
+          />,
+          document.getElementById("alerts-root")
+        )}
       {ReactDOM.createPortal(
         <NavBar></NavBar>,
         document.getElementById("navbar-root")

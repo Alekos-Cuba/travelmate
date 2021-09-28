@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import DataProvider from "../../scripts/DataProvider";
 import Modal from "./../Global/Modal";
 import WeatherInfo from "../WeatherInfo/WeatherInfo";
+import Alert from "../Global/Alert";
 import { useState } from "react";
 import ReactDOM from "react-dom";
 
@@ -14,6 +15,8 @@ function NavBar() {
   const { lat, lng } = useSelector((state) => state.mapCenter);
   const [weatherInfo, setWeatherInfo] = useState({});
   const [showWeatherModal, setShowWeatherModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   const showWeather = async (callback) => {
     const options = {
@@ -29,11 +32,17 @@ function NavBar() {
 
     const response = await DataProvider.getData(options);
     if (!response.errorMessage) {
-      console.log(response);
       setWeatherInfo(response);
       setShowWeatherModal(true);
+    } else {
+      setAlertMessage(response.errorMessage);
+      setShowAlert(true);
     }
     callback?.();
+  };
+
+  const handleAlertDismiss = () => {
+    setShowAlert(false);
   };
 
   const weatherModalCloseHandler = () => {
@@ -42,6 +51,16 @@ function NavBar() {
 
   return (
     <>
+      {showAlert &&
+        ReactDOM.createPortal(
+          <Alert
+            type="danger"
+            title={"Oops!"}
+            body={alertMessage}
+            onDismiss={handleAlertDismiss}
+          />,
+          document.getElementById("alerts-root")
+        )}
       <nav
         className={`navbar navbar-expand-lg navbar-dark bg-dark position-fixed top-0 w-100 z-index-500`}
       >
