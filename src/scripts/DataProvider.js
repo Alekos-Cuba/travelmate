@@ -6,7 +6,7 @@ class DataProviderClass {
       const response = await axios.request(options);
       return response.data;
     } catch (err) {
-      return { message: err.message };
+      return { errorMessage: err.message };
     }
   }
 }
