@@ -55,6 +55,7 @@
     <div id="overlay-root"></div>
     <div id="modals-root"></div>
     <div id="navbar-root"></div>
+    <div id="alerts-root"></div>
     <div id="left-menu-root"></div>
     <div id="root"></div>
     <!--
@@ -68,6 +69,11 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <script>
+      const url = window.location.origin;
+      if (!url.includes("localhost") && !url.includes("https")) {
+        window.location = `https:${url.split(":")[1]}`;
+      }
+
       var tooltipTriggerList = [].slice.call(
         document.querySelectorAll('[data-bs-toggle="tooltip"]')
       );
