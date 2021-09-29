@@ -3,6 +3,7 @@ class APIProviderClass {
   #defaultAPI = {
     mapTiles: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     countryList: "https://travelbriefing.org/countries.json",
+    countryBoundary: "https://nominatim.openstreetmap.org/search.php", //?q=Santiago%20de%20Cuba&polygon_geojson=1&format=jsonv2
     nearbyPlaces: "https://trueway-places.p.rapidapi.com/FindPlacesNearby",
     weather: "https://weatherapi-com.p.rapidapi.com/current.json",
   };

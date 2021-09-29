@@ -1,10 +1,35 @@
+import APIProvider from "../../scripts/APIProvider";
+import DataProvider from "../../scripts/DataProvider";
 import MapManager from "../../scripts/MapManager";
+import { useDispatch } from "react-redux";
+import { setBoundary } from "./../../redux/actions/boundaryAction";
 
 function DropdownItem({ zoom, coords, title, flag }) {
+  const dispatch = useDispatch();
   const mapZoom = zoom < 5 ? 5 : zoom;
-  const handleClick = () => {
+
+  const handleClick = async () => {
     const { lat, long } = coords;
     MapManager.getMap().flyTo({ lat: lat, lng: long }, mapZoom);
+
+    const options = {
+      url: APIProvider.getAPIbyName("countryBoundary"),
+      params: {
+        q: title,
+        polygon_geojson: 1,
+        format: "jsonv2",
+      },
+    };
+    const response = await DataProvider.getData(options);
+    if (!response.errorMessage) {
+      const boundary = response.reduce((prev, current) => {
+        return prev.importance > current.importance ? prev : current;
+      });
+      console.log(boundary);
+      dispatch(setBoundary([boundary]));
+    } else {
+      console.log(response.errorMessage);
+    }
   };
 
   return (
