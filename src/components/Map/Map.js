@@ -6,6 +6,7 @@ import {
   Marker,
   LayerGroup,
   Popup,
+  GeoJSON,
 } from "react-leaflet";
 import ReactDOM from "react-dom";
 import MapManager from "../../scripts/MapManager";
@@ -22,6 +23,7 @@ import MapCenterCoordinates from "./MapCenterCoordinates";
 function Map({ showMapCenter, onShowMarkerDetails }) {
   const dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
+  const countryBoundary = useSelector((state) => state.boundary);
   const nearbyPlaces = useSelector((state) => state.nearbyPlaces);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const defaultCenter = [38.9072, -77.0369];
@@ -82,6 +84,13 @@ function Map({ showMapCenter, onShowMarkerDetails }) {
           );
         })}
       </LayerGroup>
+      {countryBoundary.map((boundary) => {
+        return (
+          <GeoJSON key={UID.next().value} data={boundary.geojson}>
+            <Popup>{boundary.display_name}</Popup>
+          </GeoJSON>
+        );
+      })}
       <TileLayer
         url={APIProvider.getAPIbyName("mapTiles")}
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
